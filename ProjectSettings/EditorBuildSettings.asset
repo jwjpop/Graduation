@@ -12,25 +12,25 @@ EditorBuildSettings:
     path: Assets/Scenes/HomeScene.unity
     guid: ee9d56ecd19f9a14c9884bad7136915a
   - enabled: 0
-    path: Assets/__DELETED_GUID_Trash/25372ebf39ac6c644a2c34b66e7dd85d
+    path: 
     guid: 25372ebf39ac6c644a2c34b66e7dd85d
   - enabled: 0
-    path: Assets/__DELETED_GUID_Trash/e8b749e596a34f14bac705b4f1527bfd
+    path: 
     guid: e8b749e596a34f14bac705b4f1527bfd
   - enabled: 1
     path: Assets/Scenes/HistoryScene.unity
     guid: bce8c35d173595242b78c83e3d3f0c0d
   - enabled: 0
-    path: Assets/__DELETED_GUID_Trash/2da84fb98ad5dee4b8341b47c4554092
+    path: 
     guid: 2da84fb98ad5dee4b8341b47c4554092
   - enabled: 0
-    path: Assets/__DELETED_GUID_Trash/e927797a51ce34443b19d33aedb94909
+    path: 
     guid: e927797a51ce34443b19d33aedb94909
   - enabled: 1
     path: Assets/Scenes/HomeWorkScene.unity
     guid: 32813da2531904145813897cb9c9e9c6
   - enabled: 1
-    path: Assets/Scenes/ReviewScene.unity
+    path: Assets/Scenes/InvenScene.unity
     guid: 3a0531ef8fc973345b865c6438c0851b
   - enabled: 1
     path: Assets/Scenes/SchoolScene.unity
@@ -38,4 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ShopScene.unity
     guid: afa146d28f3af8a45913ca9a96af308a
+  - enabled: 1
+    path: Assets/Scenes/CodingScene.unity
+    guid: 24635621e9d042d4db1b4459c15530eb
   m_configObjects: {}

@@ -116,8 +116,9 @@ public class UnUseBlockMain : MonoBehaviour
             itemobjectTemp.Name.text = item.Name;
             itemobjectTemp.Item.onClick = item.OnItemClick;
             itemobjectTemp.btnCon.onClick = item.OnItemClick;
-
+            
             btnItemTemp.transform.SetParent(this.Content);
+            btnItemTemp.transform.localScale = Vector3.one;
 
         }
     }
@@ -256,6 +257,7 @@ public class UnUseBlockMain : MonoBehaviour
                     if (UsedItemList[i] != null)
                     {
                         UsedItemList[i].game.transform.SetParent(this.UseContent);
+                        UsedItemList[i].game.transform.localScale = Vector3.one;
                     }
                 }
             }
@@ -268,9 +270,11 @@ public class UnUseBlockMain : MonoBehaviour
                {
                    if (UsedItemList[i] != null)
                    {
+                        
                         UsedItemList[i].game.transform.SetParent(this.UseContent);
                         UsedItemList[i].game.transform.SetSiblingIndex(i);
-                   }
+                        UsedItemList[i].game.transform.localScale = Vector3.one;
+                    }
                }
             }
         }
@@ -390,7 +394,7 @@ public class UnUseBlockMain : MonoBehaviour
                                     break;
                                 }
                                 //함수면 구역을 제거
-                                else
+                                else if(!UsedItemList[i].Name.Contains("끝"))
                                 {
                                     int fxstart = UsedItemList.IndexOf(UsedItemList[i]);
                                     int fxIndex = UsedItemList[i].fxIndex;

@@ -26,11 +26,15 @@ public void ChangeSceneHomeWork()
     }
     public void ChangeSceneReview()
     {
-        SceneManager.LoadScene("ReviewScene");
+        SceneManager.LoadScene("InvenScene");
     }
     public void ChangeSceneShop()
     {
         SceneManager.LoadScene("ShopScene");
+    }
+    public void ChangeSceneCoding()
+    {
+        SceneManager.LoadScene("CodingScene");
     }
     
 }
