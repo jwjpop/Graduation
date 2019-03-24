@@ -36,5 +36,9 @@ public void ChangeSceneHomeWork()
     {
         SceneManager.LoadScene("CodingScene");
     }
-    
+    public void ChangeSceneBeforeCoding()
+    {
+        SceneManager.LoadScene("BeforeCodingScene");
+    }
+
 }
