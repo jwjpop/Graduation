@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CodingScene.unity
     guid: 24635621e9d042d4db1b4459c15530eb
+  - enabled: 1
+    path: Assets/Scenes/BeforeCodingScene.unity
+    guid: c177fc97fe1483c419c7b45ccbf58d47
   m_configObjects: {}
