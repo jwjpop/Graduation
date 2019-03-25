@@ -78,7 +78,7 @@ public class UnUseBlockMain : MonoBehaviour
                 //만약 프린트면 (조건없이 내부 채우는 변수들)
                 if(item.Name.Equals("print"))
                 {
-                    btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("conditionend") as Sprite;
+                    btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
                     itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
                     itemobjectTemp.Condition.text = null;
                     break;
@@ -87,6 +87,8 @@ public class UnUseBlockMain : MonoBehaviour
                 else if (item.Name.Equals(fx[i]))
                 {
                     btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
+                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
+                    itemobjectTemp.Condition.text = null;
                     break;
                 }
             }
@@ -148,15 +150,6 @@ public class UnUseBlockMain : MonoBehaviour
             itemTemp.Name = name;
             itemTemp.Index = Index;
 
-        for (int i = 0; i < fx.Length; i++)
-        {
-            if (name.Contains(fx[i]))
-            {
-                itemTemp.fxIndex = fxIndex;
-                itemTemp.condition = "조건을 입력하세요";
-                break;
-            }
-        }
         for (int i = 0; i < var.Length; i++)
         {
             if (name.Equals("\"\""))
@@ -183,23 +176,23 @@ public class UnUseBlockMain : MonoBehaviour
             //만약 프린트같은 조건 없는 함수라면
             if(name.Equals("print"+"시작"))
             {
-                usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("conditionend") as Sprite;
+                usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
                 useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
                 useitemobjectTemp.Condition.text = null;
                 break;
             }
             //만약 if같은 조건있는 함수라면
-            else if (name.Equals(fx[i]+"시작"))
+            else if (name.Equals(fx[i]+"시작") || name.Equals("조건"))
             {
                 usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-                useitemobjectTemp.btnCon.onClick = new Button.ButtonClickedEvent();
-                useitemobjectTemp.btnCon.onClick.AddListener(() => condition(Index));
+                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
+                useitemobjectTemp.Condition.text = null;
                 break;
             }
             //함수의 끝이라면
             else if (name.Equals(fx[i]+"끝"))
             {
-                usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("conditionend") as Sprite;
+                usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
                 useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
                 useitemobjectTemp.Condition.text = null;
                 break;
@@ -447,6 +440,8 @@ public class UnUseBlockMain : MonoBehaviour
                     if(stage[position].Equals(fx[i]))
                     {
                         AddUseListItem(stage[position] + "시작");
+                        if(stage[position].Equals("if"))
+                            AddUseListItem("조건");
                         AddUseListItem(stage[position] + "끝");
                         fxIndex++;
                         break;
