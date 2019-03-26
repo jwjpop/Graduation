@@ -271,7 +271,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 534669906}
-        m_MethodName: ChangeSceneCoding
+        m_MethodName: ChangeSceneBeforeCoding
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

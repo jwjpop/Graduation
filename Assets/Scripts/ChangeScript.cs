@@ -10,6 +10,7 @@ public class ChangeScript : MonoBehaviour
     GameObject beforePanel;
     GameObject bubble;
     GameObject bubbleTxt;
+    GameObject codingImage;
     int routine = 1;
     string[] script = { "친구를 만나면 인사를 해야돼", "말을 하기 위해선 print를 사용해보자!",
                         "문자는 꼭 따옴표(\"\")가 안에 들어가야해!","","그럼 친구에게 인사를 해보자!" };
@@ -22,6 +23,7 @@ public class ChangeScript : MonoBehaviour
         bubble.SetActive(false);
         bubbleTxt = GameObject.Find("Bubble_txt");
         bubbleTxt.SetActive(false);
+        codingImage = GameObject.Find("CodingImage");
     }
 
     // Update is called once per frame
@@ -33,6 +35,10 @@ public class ChangeScript : MonoBehaviour
             {
                 for (int i = routine; i < script.Length;i++)
                 {
+                    if(i == 2)
+                    {
+                        codingImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Before_2") as Sprite;
+                    }
                     if(script[i].Equals(""))
                     {
                         beforePanel.SetActive(false);

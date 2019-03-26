@@ -16,9 +16,9 @@ public void ChangeSceneHomeWork()
     {
         SceneManager.LoadScene("HomeWorkScene");
     }
-    public void ChangeSceneSchool()
+    public void ChangeSceneResult()
     {
-        SceneManager.LoadScene("SchoolScene");
+        SceneManager.LoadScene("ResultScene");
     }
     public void ChangeSceneHistory()
     {

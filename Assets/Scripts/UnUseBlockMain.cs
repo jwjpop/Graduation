@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UnUseBlockMain : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class UnUseBlockMain : MonoBehaviour
     private static int stageIndex = 0;
 
     //스테이지마다 사용될 버튼들 배열 만들기
-    private string[] stage = {"print","\"\"","print","Subject","print","X","Y","+",",","if"};
+    private string[] stage = {"print","\"\"","X","Y","+",",","if"};
     //함수 배열
     private string[] fx = {"print","if"};
     //변수 배열
@@ -79,7 +80,7 @@ public class UnUseBlockMain : MonoBehaviour
                 if(item.Name.Equals("print"))
                 {
                     btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
+                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 30);
                     itemobjectTemp.Condition.text = null;
                     break;
                 }
@@ -87,7 +88,7 @@ public class UnUseBlockMain : MonoBehaviour
                 else if (item.Name.Equals(fx[i]))
                 {
                     btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
+                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 30);
                     itemobjectTemp.Condition.text = null;
                     break;
                 }
@@ -98,7 +99,7 @@ public class UnUseBlockMain : MonoBehaviour
                 if (item.Name.Equals(var[i]))
                 {
                     btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("variable") as Sprite;
-                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
+                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 30);
                     itemobjectTemp.Condition.text = null;
                     break;
                 }
@@ -109,7 +110,7 @@ public class UnUseBlockMain : MonoBehaviour
                 if(item.Name.Equals(extraChar[i]))
                 {
                      btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("sign") as Sprite;
-                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
+                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 30);
                     itemobjectTemp.Condition.text = null;
                     break;
                 }
@@ -154,7 +155,7 @@ public class UnUseBlockMain : MonoBehaviour
         {
             if (name.Equals("\"\""))
             {
-               itemTemp.condition = "변수를 입력하세요";
+               itemTemp.condition = "";
                 break;
             }
         }
@@ -177,7 +178,7 @@ public class UnUseBlockMain : MonoBehaviour
             if(name.Equals("print"+"시작"))
             {
                 usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
+                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(200, 40);
                 useitemobjectTemp.Condition.text = null;
                 break;
             }
@@ -185,7 +186,7 @@ public class UnUseBlockMain : MonoBehaviour
             else if (name.Equals(fx[i]+"시작") || name.Equals("조건"))
             {
                 usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
+                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(200, 40);
                 useitemobjectTemp.Condition.text = null;
                 break;
             }
@@ -193,7 +194,7 @@ public class UnUseBlockMain : MonoBehaviour
             else if (name.Equals(fx[i]+"끝"))
             {
                 usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
+                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(200, 40);
                 useitemobjectTemp.Condition.text = null;
                 break;
             }
@@ -205,7 +206,7 @@ public class UnUseBlockMain : MonoBehaviour
             if(name.Equals(var[i]))
             {
                 usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("variable") as Sprite;
-                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
+                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(200, 40);
                 useitemobjectTemp.Condition.text = null;
 
                 //텍스트 필드로써 값으로 변경되어야하는 것
@@ -229,7 +230,7 @@ public class UnUseBlockMain : MonoBehaviour
             if(name.Equals(extraChar[i]))
             {
                 usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("sign") as Sprite;
-                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 20);
+                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(150, 50);
                 useitemobjectTemp.Condition.text = null;
                 break;
             }
@@ -597,9 +598,9 @@ public class UnUseBlockMain : MonoBehaviour
                         itemobjectTemp.Name.text = "\"" + input + "\"";
 
                         //인풋이 5자 이상일경우 줄임말로 표현해줌
-                        if (input.Length > 5)
+                        if (input.Length > 20)
                         {
-                            itemobjectTemp.Name.text = "\"" + input.Substring(0, 5) + "...";
+                            itemobjectTemp.Name.text = "\"" + input.Substring(0, 20) + "...";
                         }
                         break;
                     }
@@ -620,9 +621,9 @@ public class UnUseBlockMain : MonoBehaviour
                         itemobjectTemp.Condition.text = input;
 
                         //인풋이 4자 이상일경우 줄임말로 표현해줌
-                        if (input.Length > 4)
+                        if (input.Length > 20)
                         {
-                            itemobjectTemp.Condition.text = input.Substring(0, 4) + "...";
+                            itemobjectTemp.Condition.text = input.Substring(0, 20) + "...";
                         }
                         break;
                     }
@@ -638,5 +639,20 @@ public class UnUseBlockMain : MonoBehaviour
     public void ConCancel()
     {
         panel.SetActive(false);
+    }
+
+
+    public void ChangeSceneResult()
+    {
+        CheckAns.ans.Clear();
+
+        for (int i=0;i< UsedItemList.Count;i++)
+        {
+            if (UsedItemList[i] != null)
+            {
+                CheckAns.ans.Add(UsedItemList[i]);
+            }
+        }
+        SceneManager.LoadScene("ResultScene");
     }
 }

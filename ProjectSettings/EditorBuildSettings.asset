@@ -13,28 +13,28 @@ EditorBuildSettings:
     guid: ee9d56ecd19f9a14c9884bad7136915a
   - enabled: 0
     path: 
-    guid: 25372ebf39ac6c644a2c34b66e7dd85d
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
-    guid: e8b749e596a34f14bac705b4f1527bfd
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/HistoryScene.unity
     guid: bce8c35d173595242b78c83e3d3f0c0d
   - enabled: 0
     path: 
-    guid: 2da84fb98ad5dee4b8341b47c4554092
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
-    guid: e927797a51ce34443b19d33aedb94909
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/HomeWorkScene.unity
     guid: 32813da2531904145813897cb9c9e9c6
   - enabled: 1
     path: Assets/Scenes/InvenScene.unity
     guid: 3a0531ef8fc973345b865c6438c0851b
-  - enabled: 1
-    path: Assets/Scenes/SchoolScene.unity
-    guid: f89eaf4fe6d00b04d95b2422151f5f6d
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/ShopScene.unity
     guid: afa146d28f3af8a45913ca9a96af308a
@@ -42,6 +42,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CodingScene.unity
     guid: 24635621e9d042d4db1b4459c15530eb
   - enabled: 1
-    path: Assets/Scenes/BeforeCodingScene.unity
+    path: Assets/Scenes/ResultScene.unity
     guid: c177fc97fe1483c419c7b45ccbf58d47
+  - enabled: 1
+    path: Assets/Scenes/BeforeCodingScene.unity
+    guid: 5a0562f9dc1dbc04691106a10d1a3773
   m_configObjects: {}
