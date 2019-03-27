@@ -9,6 +9,7 @@ public class UnUseBlockMain : MonoBehaviour
 {
     public GameObject ItemObject;
     private GameObject panel;
+    private GameObject upDownPanel;
 
     public Transform Content;
     public Transform UseContent;
@@ -132,6 +133,8 @@ public class UnUseBlockMain : MonoBehaviour
         //패널 비활성화
         panel = GameObject.Find("ConPanel");
         panel.SetActive(false);
+        upDownPanel = GameObject.Find("UpDownPanel");
+        upDownPanel.SetActive(false);
 
         AddListItem();
         this.Binding();
@@ -321,6 +324,14 @@ public class UnUseBlockMain : MonoBehaviour
                                     FlagInnerChange();
                                     break;
                                 }
+                                else if (UsedItemList[i].Name.Equals("조건"))
+                                {
+                                    Debug.Log("함수모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
+                                    fxstr = UsedItemList.IndexOf(UsedItemList[i]);
+                                    FlagInnerChange();
+                                    upDownPanel.SetActive(true);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -360,6 +371,13 @@ public class UnUseBlockMain : MonoBehaviour
                                     Debug.Log("전체모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
                                     fxstr = UsedItemList.IndexOf(UsedItemList[i]);
                                     FlagInnerChange();
+                                    break;
+                                }
+                                else if (UsedItemList[i].Name.Equals("조건"))
+                                {
+                                    Debug.Log("함수모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
+                                    fxstr = UsedItemList.IndexOf(UsedItemList[i]);
+                                    upDownPanel.SetActive(true);
                                     break;
                                 }
                             }
@@ -649,6 +667,16 @@ public class UnUseBlockMain : MonoBehaviour
         panel.SetActive(false);
     }
 
+    public void conUp()
+    {
+        upDownPanel.SetActive(false);
+    }
+
+    public void conDown()
+    {
+        fxstr += 1;
+        upDownPanel.SetActive(false);
+    }
 
     public void ChangeSceneResult()
     {
