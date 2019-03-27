@@ -38,6 +38,7 @@ public class UnUseBlockMain : MonoBehaviour
     private string[] var = {"\"\"","Subject","X","Y"};
     //부가적인 문자
     private string[] extraChar = {"+",","};
+    
     //사용할 버튼 리스트
     private void AddListItem()
     {
@@ -300,6 +301,7 @@ public class UnUseBlockMain : MonoBehaviour
                                     break;
                                 }
                             }
+
                             for(int j=0;j<fx.Length;j++)
                             {
                                 //함수시작이면
@@ -377,18 +379,18 @@ public class UnUseBlockMain : MonoBehaviour
                     {
                         if (UsedItemList[i].Index == Index)
                         {
-                            //변수인지 판단
-                            for(int j=0;j<var.Length;j++)
+                            //var 외에 제거 이루어지는 부분
+                            for(int j=0;j<extraChar.Length;j++)
                             {
-                                //변수면 그것만 제거
-                                if (UsedItemList[i].Name.Equals(var[j]))
+                                //extraChar면 그것만 제거
+                                if (UsedItemList[i].Name.Equals(extraChar[j]))
                                 {
                                     Destroy(UsedItemList[i].game);
                                     UsedItemList.RemoveAt(UsedItemList.IndexOf(UsedItemList[i]));
                                     break;
                                 }
                                 //함수면 구역을 제거
-                                else if(!UsedItemList[i].Name.Contains("끝"))
+                                else if(!UsedItemList[i].Name.Contains("끝") && !UsedItemList[i].Name.Contains("조건"))
                                 {
                                     int fxstart = UsedItemList.IndexOf(UsedItemList[i]);
                                     int fxIndex = UsedItemList[i].fxIndex;
@@ -417,7 +419,7 @@ public class UnUseBlockMain : MonoBehaviour
 
                                     break;
                                 }
-                            }
+                            }    
                         }
                     }
                 }
@@ -512,6 +514,8 @@ public class UnUseBlockMain : MonoBehaviour
         {
             flagAdd = false;
             flagAddText.text = "제거";
+            flagAll = true;
+            flagAllText.text = "전체 모드";
         }
         else
         {
@@ -557,6 +561,7 @@ public class UnUseBlockMain : MonoBehaviour
             }
             panel.SetActive(true);
         }
+        //var 제거가 이루어지는 부분
         //제거모드면
         else
         {
