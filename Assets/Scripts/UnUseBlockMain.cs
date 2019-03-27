@@ -151,6 +151,7 @@ public class UnUseBlockMain : MonoBehaviour
             itemTemp = new Item();
             itemTemp.Name = name;
             itemTemp.Index = Index;
+            itemTemp.fxIndex = fxIndex;
 
         for (int i = 0; i < var.Length; i++)
         {
@@ -171,7 +172,7 @@ public class UnUseBlockMain : MonoBehaviour
         useitemobjectTemp.Item.onClick.AddListener(() => usedButtonClick(Index));
         
         //순서 알기 쉽게 디버깅용 하이어라키쪽
-        usebtnItemTemp.name = itemTemp.Name + "_" + Index;
+        usebtnItemTemp.name = itemTemp.Name + "_" + Index + " " + fxIndex;
 
         for (int i = 0; i < fx.Length; i++)
         {
@@ -231,7 +232,7 @@ public class UnUseBlockMain : MonoBehaviour
             if(name.Equals(extraChar[i]))
             {
                 usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("sign") as Sprite;
-                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(150, 50);
+                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(200, 40);
                 useitemobjectTemp.Condition.text = null;
                 break;
             }
@@ -393,7 +394,7 @@ public class UnUseBlockMain : MonoBehaviour
                                 else if(!UsedItemList[i].Name.Contains("끝") && !UsedItemList[i].Name.Contains("조건"))
                                 {
                                     int fxstart = UsedItemList.IndexOf(UsedItemList[i]);
-                                    int fxIndex = UsedItemList[i].fxIndex;
+                                    int setfxIndex = UsedItemList[i].fxIndex;
                                     int fxend = 0;
 
                                     //함수끝의 인덱스를 찾기 위한 검사
@@ -402,7 +403,7 @@ public class UnUseBlockMain : MonoBehaviour
                                         if (UsedItemList[k] != null)
                                         {
                                             //함수 끝이면서 fxIndex로 짝이 맞을 때
-                                            if (UsedItemList[k].game.name.Contains("끝") && UsedItemList[k].fxIndex == fxIndex)
+                                            if (UsedItemList[k].game.name.Contains("끝") && UsedItemList[k].fxIndex == setfxIndex)
                                             {
                                                 fxend = UsedItemList.IndexOf(UsedItemList[k]);
                                                 break;
@@ -480,6 +481,8 @@ public class UnUseBlockMain : MonoBehaviour
                     if (stage[position].Equals(fx[i]))
                     {
                         AddUseListItem(stage[position] + "시작");
+                        if (stage[position].Equals("if"))
+                            AddUseListItem("조건");
                         AddUseListItem(stage[position] + "끝");
                         fxIndex++;
                         break;
