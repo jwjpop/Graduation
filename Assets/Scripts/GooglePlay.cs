@@ -1,11 +1,11 @@
 ﻿using GooglePlayGames;
 using GooglePlayGames.BasicApi;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GooglePlay : MonoBehaviour
 {
+    public Text result;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,13 +28,13 @@ public class GooglePlay : MonoBehaviour
         {
             if (success)
             {
-                Debug.Log("success");
+                result.text = "success";
                 // to do ...
                 // 로그인 성공 처리
             }
             else
             {
-                Debug.Log("fail");
+                result.text = "fail";
                 // to do ...
                 // 로그인 실패 처리
             }
