@@ -19,6 +19,7 @@ public class UnUseBlockMain : MonoBehaviour
 
     public Text flagAddText;
     public Text flagAllText;
+    public Text title;
     public InputField ConInput;
 
     private bool flagAdd = true;
@@ -30,16 +31,18 @@ public class UnUseBlockMain : MonoBehaviour
     private int conIndex = 0;
     //스테이지 시작 인덱스를 기억 static 뿐만아니라 게임이 실행되는 내내 보관되어야하는 형태면 가능
     private static int stageIndex = 0;
-
+    private static int stageTitleIndex = 1;
     //스테이지마다 사용될 버튼들 배열 만들기
-    private string[] stage = {"print","\"\"","X","+","if","/",
-                              "print","Subject","/",
-                              "print","X","+","Y","\"\"","/",
-                              "print","X","+","Y","\"\"","/",
-                              "if","모자","빨간색","==","print","\"\"","/",
-                              "if","문자","1","==","print","\"\"","else","/",
-                              "if","체크카드 잔액","금액",">=","print","치킨","elif","떡볶이","else","짜장면","학식","라면","굶기","/",
-                              "if","과제","==","0","&&","벚꽃","1","print","\"\"","/"};
+    private string[] stage = {"print","\"\"","X","+","if","/1",
+                              "print","Subject","/2",
+                              "print","X","+","Y","\"\"","/3",
+                              "print","X","+","Y","\"\"","/4",
+                              "if","모자","빨간색","==","print","\"\"","/5",
+                              "if","문자","1","==","print","\"\"","else","/6",
+                              "if","체크카드 잔액","금액",">=","print","치킨","elif","떡볶이","else","짜장면","학식","라면","굶기","/7",
+                              "if","과제","==","0","&&","벚꽃","1","print","\"\"","/8"};
+    //스테이지 타이틀
+    private string[] stageTitle = {"0번","1탄"};
     //함수 배열
     private string[] fx = { "print", "if" }; //else, elif
     //변수 배열
@@ -55,9 +58,12 @@ public class UnUseBlockMain : MonoBehaviour
         for (int i = stageIndex; i < stage.Length; i++)
         {
             //1탄의 끝 만나면 더이상 추가x
-            if (stage[i].Equals("/"))
+            if (stage[i].Contains("/"))
             {
                 stageIndex = i + 1;
+                string[] st = stage[i].Split('/');
+                stageTitleIndex = Convert.ToInt32(st[1]);
+                title.text = stageTitle[stageTitleIndex];
                 break;
             }
 
