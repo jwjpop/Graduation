@@ -32,13 +32,20 @@ public class UnUseBlockMain : MonoBehaviour
     private static int stageIndex = 0;
 
     //스테이지마다 사용될 버튼들 배열 만들기
-    private string[] stage = {"print","\"\"","X","Y","+",",","if"};
+    private string[] stage = {"print","\"\"","/",
+                              "print","Subject","/",
+                              "print","X","+","Y","\"\"","/",
+                              "print","X","+","Y","\"\"","/",
+                              "if","모자","빨간색","==","print","\"\"","/",
+                              "if","문자","1","==","print","\"\"","else","/",
+                              "if","체크카드 잔액","금액",">=","print","치킨","elif","떡볶이","else","짜장면","학식","라면","굶기","/",
+                              "if","과제","==","0","&&","벚꽃","1","print","\"\"","/"};
     //함수 배열
-    private string[] fx = {"print","if"};
+    private string[] fx = {"print","if"}; //else, elif
     //변수 배열
-    private string[] var = {"\"\"","Subject","X","Y"};
+    private string[] var = {"\"\"","Subject","X","Y"}; //돈, 체크카드 잔액
     //부가적인 문자
-    private string[] extraChar = {"+",","};
+    private string[] extraChar = {"+","==","모자","빨간색"}; //문자, &&, 벚꽃, 과제, 1, 0, >=, 치킨, 떡볶이, 짜장면, 학식, 라면, 굶기
     
     //사용할 버튼 리스트
     private void AddListItem()
@@ -47,12 +54,12 @@ public class UnUseBlockMain : MonoBehaviour
         
         for(int i= stageIndex; i<stage.Length;i++)
         {
-          /*  //1탄의 끝 만나면 더이상 추가x
+           //1탄의 끝 만나면 더이상 추가x
             if (stage[i].Equals("/"))
             {
                 stageIndex = i+1;
                 break;
-            }*/
+            }
 
             itemTemp = new Item();
             int position = i;
