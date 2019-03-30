@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ChangeScript : MonoBehaviour
+public class BeforeCodingScript : MonoBehaviour
 {
     public Text txtScript;
+    public Text txtBubble;
     GameObject beforePanel;
     GameObject bubble;
-    GameObject bubbleTxt;
     GameObject codingImage;
     int routine = 1;
     string[] script = { "친구를 만나면 인사를 해야돼", "말을 하기 위해선 print를 사용해보자!",
@@ -19,10 +19,8 @@ public class ChangeScript : MonoBehaviour
     {
         txtScript.text = script[0];
         beforePanel = GameObject.Find("BeforePanel");
-        bubble = GameObject.Find("Bubble_nine");
+        bubble = GameObject.Find("Bubble");
         bubble.SetActive(false);
-        bubbleTxt = GameObject.Find("Bubble_txt");
-        bubbleTxt.SetActive(false);
         codingImage = GameObject.Find("CodingImage");
     }
 
@@ -42,14 +40,13 @@ public class ChangeScript : MonoBehaviour
                     if(script[i].Equals(""))
                     {
                         beforePanel.SetActive(false);
+                        txtBubble.text = "Hello, World!";
                         bubble.SetActive(true);
-                        bubbleTxt.SetActive(true);
                     }
                     else
                     {
                         beforePanel.SetActive(true);
                         bubble.SetActive(false);
-                        bubbleTxt.SetActive(false);
                     }
                     txtScript.text = script[i];
                     break;
