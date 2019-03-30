@@ -32,7 +32,7 @@ public class UnUseBlockMain : MonoBehaviour
     private static int stageIndex = 0;
 
     //스테이지마다 사용될 버튼들 배열 만들기
-    private string[] stage = {"print","\"\"","/",
+    private string[] stage = {"print","\"\"","X","+","if","/",
                               "print","Subject","/",
                               "print","X","+","Y","\"\"","/",
                               "print","X","+","Y","\"\"","/",
@@ -41,33 +41,33 @@ public class UnUseBlockMain : MonoBehaviour
                               "if","체크카드 잔액","금액",">=","print","치킨","elif","떡볶이","else","짜장면","학식","라면","굶기","/",
                               "if","과제","==","0","&&","벚꽃","1","print","\"\"","/"};
     //함수 배열
-    private string[] fx = {"print","if"}; //else, elif
+    private string[] fx = { "print", "if" }; //else, elif
     //변수 배열
-    private string[] var = {"\"\"","Subject","X","Y"}; //돈, 체크카드 잔액
+    private string[] var = { "\"\"", "Subject", "X", "Y" }; //돈, 체크카드 잔액
     //부가적인 문자
-    private string[] extraChar = {"+","==","모자","빨간색"}; //문자, &&, 벚꽃, 과제, 1, 0, >=, 치킨, 떡볶이, 짜장면, 학식, 라면, 굶기
-    
+    private string[] extraChar = { "+", "==", "모자", "빨간색" }; //문자, &&, 벚꽃, 과제, 1, 0, >=, 치킨, 떡볶이, 짜장면, 학식, 라면, 굶기
+
     //사용할 버튼 리스트
     private void AddListItem()
     {
         Item itemTemp;
-        
-        for(int i= stageIndex; i<stage.Length;i++)
+
+        for (int i = stageIndex; i < stage.Length; i++)
         {
-           //1탄의 끝 만나면 더이상 추가x
+            //1탄의 끝 만나면 더이상 추가x
             if (stage[i].Equals("/"))
             {
-                stageIndex = i+1;
+                stageIndex = i + 1;
                 break;
             }
 
             itemTemp = new Item();
             int position = i;
-            
+
             itemTemp.Name = stage[i];
-            
+
             itemTemp.OnItemClick = new Button.ButtonClickedEvent();
-            itemTemp.OnItemClick.AddListener(()=>ItemClick_Add(position));
+            itemTemp.OnItemClick.AddListener(() => ItemClick_Add(position));
 
             this.ItemList.Add(itemTemp);
         }
@@ -83,52 +83,34 @@ public class UnUseBlockMain : MonoBehaviour
             btnItemTemp = Instantiate(this.ItemObject) as GameObject;
             itemobjectTemp = btnItemTemp.GetComponent<ItemObject>();
 
-            for (int i = 0; i < fx.Length; i++)
-            {
-                //만약 프린트면 (조건없이 내부 채우는 변수들)
-                if(item.Name.Equals("print"))
-                {
-                    btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 30);
-                    itemobjectTemp.Condition.text = null;
-                    break;
-                }
-                //만약 if같은 조건있는 변수라면
-                else if (item.Name.Equals(fx[i]))
-                {
-                    btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 30);
-                    itemobjectTemp.Condition.text = null;
-                    break;
-                }
-            }
+            btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
+            itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 30);
+            itemobjectTemp.Condition.text = null;
+            
+            //만약 변수면
             for (int i = 0; i < var.Length; i++)
             {
-                //만약 변수라면
                 if (item.Name.Equals(var[i]))
                 {
                     btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("variable") as Sprite;
-                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 30);
-                    itemobjectTemp.Condition.text = null;
                     break;
                 }
             }
 
-            for(int i = 0; i < extraChar.Length;i++)
+            //만약 extra 면
+            for (int i = 0; i < extraChar.Length; i++)
             {
-                if(item.Name.Equals(extraChar[i]))
+                if (item.Name.Equals(extraChar[i]))
                 {
-                     btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("sign") as Sprite;
-                    itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 30);
-                    itemobjectTemp.Condition.text = null;
+                    btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("sign") as Sprite;
                     break;
                 }
             }
-            
+
             itemobjectTemp.Name.text = item.Name;
             itemobjectTemp.Item.onClick = item.OnItemClick;
             itemobjectTemp.btnCon.onClick = item.OnItemClick;
-            
+
             btnItemTemp.transform.SetParent(this.Content);
             btnItemTemp.transform.localScale = Vector3.one;
 
@@ -151,109 +133,72 @@ public class UnUseBlockMain : MonoBehaviour
     //리스트에 넣음과 동시에 버튼에 바인딩
     private void AddUseListItem(string name)
     {
-    GameObject usebtnItemTemp;
-    ItemObject useitemobjectTemp;
-    Item itemTemp;
- 
+        GameObject usebtnItemTemp;
+        ItemObject useitemobjectTemp;
+        Item itemTemp;
+
         int Index = useIndex;
 
         //보여지는 버튼에 대한 속성들
-            itemTemp = new Item();
-            itemTemp.Name = name;
-            itemTemp.Index = Index;
-            itemTemp.fxIndex = fxIndex;
+        itemTemp = new Item();
+        itemTemp.Name = name;
+        itemTemp.Index = Index;
+        itemTemp.fxIndex = fxIndex;
 
         for (int i = 0; i < var.Length; i++)
         {
             if (name.Equals("\"\""))
             {
-               itemTemp.condition = "";
+                itemTemp.condition = "";
                 break;
             }
         }
 
         //게임 오브젝트로 붙이는 부분
         usebtnItemTemp = Instantiate(this.ItemObject) as GameObject;
-        
+
         useitemobjectTemp = usebtnItemTemp.GetComponent<ItemObject>();
 
         useitemobjectTemp.Name.text = itemTemp.Name;
         useitemobjectTemp.Item.onClick = new Button.ButtonClickedEvent();
         useitemobjectTemp.Item.onClick.AddListener(() => usedButtonClick(Index));
-        
+
         //순서 알기 쉽게 디버깅용 하이어라키쪽
         usebtnItemTemp.name = itemTemp.Name + "_" + Index + " " + fxIndex;
-
-        for (int i = 0; i < fx.Length; i++)
-        {
-            //만약 프린트같은 조건 없는 함수라면
-            if(name.Equals("print"+"시작"))
-            {
-                usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(200, 40);
-                useitemobjectTemp.Condition.text = null;
-                break;
-            }
-            //만약 if같은 조건있는 함수라면
-            else if (name.Equals(fx[i]+"시작") || name.Equals("조건"))
-            {
-                usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(200, 40);
-                useitemobjectTemp.Condition.text = null;
-                break;
-            }
-            //함수의 끝이라면
-            else if (name.Equals(fx[i]+"끝"))
-            {
-                usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(200, 40);
-                useitemobjectTemp.Condition.text = null;
-                break;
-            }
-        }
-
+        usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
+        useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(200, 40);
+        useitemobjectTemp.Condition.text = null;
+        
+        //만약 변수라면
         for (int i = 0; i < var.Length; i++)
         {
-            //만약 변수라면
-            if(name.Equals(var[i]))
+            if (name.Equals(var[i]))
             {
                 usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("variable") as Sprite;
-                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(200, 40);
-                useitemobjectTemp.Condition.text = null;
-
-                //텍스트 필드로써 값으로 변경되어야하는 것
-                if(name.Equals("\"\""))
-                {
-                    useitemobjectTemp.Item.onClick = new Button.ButtonClickedEvent();
-                    useitemobjectTemp.Item.onClick.AddListener(() => condition(Index));
-                }
-                //변수명으로써 이름이 값으로 변경되어서는 안되는 것
-                if(name.Equals("Subject") || name.Equals("X") || name.Equals("Y"))
-                {
-                    useitemobjectTemp.Item.onClick = new Button.ButtonClickedEvent();
-                    useitemobjectTemp.Item.onClick.AddListener(() => condition(Index));
-                }
+                useitemobjectTemp.Item.onClick = new Button.ButtonClickedEvent();
+                useitemobjectTemp.Item.onClick.AddListener(() => condition(Index));
                 break;
             }
         }
 
-        for(int i = 0; i< extraChar.Length; i++)
+        //만약 extra라면
+        for (int i = 0; i < extraChar.Length; i++)
         {
-            if(name.Equals(extraChar[i]))
+            if (name.Equals(extraChar[i]))
             {
                 usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("sign") as Sprite;
-                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(200, 40);
-                useitemobjectTemp.Condition.text = null;
+                useitemobjectTemp.Item.onClick = new Button.ButtonClickedEvent();
+                useitemobjectTemp.Item.onClick.AddListener(() => extra(Index));
                 break;
             }
         }
-        
+
         //게임 오브젝트
         itemTemp.game = usebtnItemTemp;
 
         //추가모드
         if (flagAdd)
-        {            
+        {
             //전체 모드
             if (flagAll)
             {
@@ -270,24 +215,24 @@ public class UnUseBlockMain : MonoBehaviour
             //함수 모드
             else
             {
-                this.UsedItemList.Insert(fxstr,itemTemp);
+                this.UsedItemList.Insert(fxstr, itemTemp);
 
-               for (int i = 0; i < UsedItemList.Count; i++)
-               {
-                   if (UsedItemList[i] != null)
-                   {
-                        
+                for (int i = 0; i < UsedItemList.Count; i++)
+                {
+                    if (UsedItemList[i] != null)
+                    {
+
                         UsedItemList[i].game.transform.SetParent(this.UseContent);
                         UsedItemList[i].game.transform.SetSiblingIndex(i);
                         UsedItemList[i].game.transform.localScale = Vector3.one;
                     }
-               }
+                }
             }
         }
         fxstr++;
         useIndex++;
     }
-    
+
     //사용된 버튼 누르면 나오는 동작
     public void usedButtonClick(int Index)
     {
@@ -295,28 +240,18 @@ public class UnUseBlockMain : MonoBehaviour
         if (flagAdd)
         {
             //전체 모드
-            if(flagAll)
+            if (flagAll)
             {
-                for(int i = 0; i<UsedItemList.Count; i++)
+                for (int i = 0; i < UsedItemList.Count; i++)
                 {
                     if (UsedItemList[i] != null)
                     {
                         if (UsedItemList[i].Index == Index)
                         {
-                            for(int j=0;j<var.Length;j++)
-                            {
-                                //변수를 누르면
-                                if (UsedItemList[i].Name.Equals(var[j]))
-                                {
-                                    Debug.Log("추가모드 + 전체모드 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
-                                    break;
-                                }
-                            }
-
-                            for(int j=0;j<fx.Length;j++)
+                            for (int j = 0; j < fx.Length; j++)
                             {
                                 //함수시작이면
-                                if (UsedItemList[i].Name.Equals(fx[j]+"시작"))
+                                if (UsedItemList[i].Name.Equals(fx[j] + "시작"))
                                 {
                                     Debug.Log("함수모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
                                     fxstr = UsedItemList.IndexOf(UsedItemList[i]) + 1;
@@ -353,15 +288,6 @@ public class UnUseBlockMain : MonoBehaviour
                     {
                         if (UsedItemList[i].Index == Index)
                         {
-                            for (int j = 0; j < var.Length; j++)
-                            {
-                                //변수를 누르면
-                                if (UsedItemList[i].Name.Equals(var[j]))
-                                {
-                                    Debug.Log("추가모드 + 함수모드 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
-                                    break;
-                                }
-                            }
                             for (int j = 0; j < fx.Length; j++)
                             {
                                 //함수시작이면
@@ -406,94 +332,84 @@ public class UnUseBlockMain : MonoBehaviour
                         if (UsedItemList[i].Index == Index)
                         {
                             //var 외에 제거 이루어지는 부분
-                            for(int j=0;j<extraChar.Length;j++)
+                            if (!UsedItemList[i].Name.Contains("끝") && !UsedItemList[i].Name.Contains("조건"))
                             {
-                                //extraChar면 그것만 제거
-                                if (UsedItemList[i].Name.Equals(extraChar[j]))
-                                {
-                                    Destroy(UsedItemList[i].game);
-                                    UsedItemList.RemoveAt(UsedItemList.IndexOf(UsedItemList[i]));
-                                    break;
-                                }
-                                //함수면 구역을 제거
-                                else if(!UsedItemList[i].Name.Contains("끝") && !UsedItemList[i].Name.Contains("조건"))
-                                {
-                                    int fxstart = UsedItemList.IndexOf(UsedItemList[i]);
-                                    int setfxIndex = UsedItemList[i].fxIndex;
-                                    int fxend = 0;
+                                int fxstart = UsedItemList.IndexOf(UsedItemList[i]);
+                                int setfxIndex = UsedItemList[i].fxIndex;
+                                int fxend = 0;
 
-                                    //함수끝의 인덱스를 찾기 위한 검사
-                                    for (int k = fxstart; k < UsedItemList.Count; k++)
+                                //함수끝의 인덱스를 찾기 위한 검사
+                                for (int k = fxstart; k < UsedItemList.Count; k++)
+                                {
+                                    if (UsedItemList[k] != null)
                                     {
-                                        if (UsedItemList[k] != null)
+                                        //함수 끝이면서 fxIndex로 짝이 맞을 때
+                                        if (UsedItemList[k].game.name.Contains("끝") && UsedItemList[k].fxIndex == setfxIndex)
                                         {
-                                            //함수 끝이면서 fxIndex로 짝이 맞을 때
-                                            if (UsedItemList[k].game.name.Contains("끝") && UsedItemList[k].fxIndex == setfxIndex)
-                                            {
-                                                fxend = UsedItemList.IndexOf(UsedItemList[k]);
-                                                break;
-                                            }
+                                            fxend = UsedItemList.IndexOf(UsedItemList[k]);
+                                            break;
                                         }
                                     }
-                                    //함수 시작부터 끝까지 통으로 삭제
-                                    for (int k = fxstart; k <= fxend; k++)
-                                    {
-                                        Destroy(UsedItemList[k].game);
-                                    }
-
-                                    UsedItemList.RemoveRange(fxstart, fxend - fxstart + 1);
-
-                                    break;
                                 }
-                            }    
+                                //함수 시작부터 끝까지 통으로 삭제
+                                for (int k = fxstart; k <= fxend; k++)
+                                {
+                                    Destroy(UsedItemList[k].game);
+                                }
+
+                                UsedItemList.RemoveRange(fxstart, fxend - fxstart + 1);
+
+                                break;
+                            }
+
                         }
                     }
                 }
             }
         }
-        
+
     }
 
     //사용할 버튼 누르면 사용된 버튼 리스트에 추가됨
     public void ItemClick_Add(int position)
     {
         //전체 편집 모드
-        if(flagAll)
+        if (flagAll)
         {
             //추가 모드
-            if(flagAdd)
+            if (flagAdd)
             {
-                for(int i=0;i<fx.Length;i++)
+                for (int i = 0; i < fx.Length; i++)
                 {
                     //함수면
-                    if(stage[position].Equals(fx[i]))
+                    if (stage[position].Equals(fx[i]))
                     {
                         AddUseListItem(stage[position] + "시작");
-                        if(stage[position].Equals("if"))
+                        if (stage[position].Equals("if"))
                             AddUseListItem("조건");
                         AddUseListItem(stage[position] + "끝");
                         fxIndex++;
                         break;
                     }
                 }
-                for(int i=0; i<var.Length;i++)
+                for (int i = 0; i < var.Length; i++)
                 {
                     //변수면
-                    if(stage[position].Equals(var[i]))
+                    if (stage[position].Equals(var[i]))
                     {
                         AddUseListItem(stage[position]);
                         break;
                     }
                 }
-                for(int i = 0; i<extraChar.Length;i++)
+                for (int i = 0; i < extraChar.Length; i++)
                 {
-                    if(stage[position].Equals(extraChar[i]))
+                    if (stage[position].Equals(extraChar[i]))
                     {
                         AddUseListItem(stage[position]);
                         break;
                     }
                 }
-            }           
+            }
         }
         //함수 내부 편집 모드일 때 함수 시작 다음 부분부터 넣어줘야함
         else
@@ -522,7 +438,7 @@ public class UnUseBlockMain : MonoBehaviour
                         break;
                     }
                 }
-                for (int i = 0; i< extraChar.Length; i++)
+                for (int i = 0; i < extraChar.Length; i++)
                 {
                     if (stage[position].Equals(extraChar[i]))
                     {
@@ -532,7 +448,7 @@ public class UnUseBlockMain : MonoBehaviour
                 }
             }
         }
-       
+
     }
 
     //추가,제거 모드 전환
@@ -564,7 +480,7 @@ public class UnUseBlockMain : MonoBehaviour
         {
             flagAll = true;
             flagAllText.text = "전체 모드";
-            
+
         }
     }
 
@@ -608,6 +524,27 @@ public class UnUseBlockMain : MonoBehaviour
         }
     }
 
+    //extra 제거 함수
+    public void extra(int Index)
+    {
+        int extraIndex = Index;
+
+        if (!flagAdd)
+        {
+            for (int i = 0; i < UsedItemList.Count; i++)
+            {
+                if (UsedItemList[i] != null)
+                {
+                    if (UsedItemList[i].Index == extraIndex)
+                    {
+                        Destroy(UsedItemList[i].game);
+                        UsedItemList.RemoveAt(UsedItemList.IndexOf(UsedItemList[i]));
+                        break;
+                    }
+                }
+            }
+        }
+    }
     //조건 입력한 것 저장하고 닫아줌
     //버튼에 직접 달아놨음
     public void ConSubmit()
@@ -621,7 +558,7 @@ public class UnUseBlockMain : MonoBehaviour
                 if (UsedItemList[i].Index == conIndex)
                 {
                     //만약 변경값을 뿌려주는 ""형 변수면
-                    if(UsedItemList[i].Name.Equals("\"\""))
+                    if (UsedItemList[i].Name.Equals("\"\""))
                     {
                         //인풋을 컨디션에 저장
                         UsedItemList[i].condition = input;
@@ -660,7 +597,7 @@ public class UnUseBlockMain : MonoBehaviour
                         }
                         break;
                     }
-                   
+
                 }
             }
         }
@@ -689,7 +626,7 @@ public class UnUseBlockMain : MonoBehaviour
     {
         CheckAns.ans.Clear();
 
-        for (int i=0;i< UsedItemList.Count;i++)
+        for (int i = 0; i < UsedItemList.Count; i++)
         {
             if (UsedItemList[i] != null)
             {
