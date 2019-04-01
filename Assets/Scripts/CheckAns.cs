@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class CheckAns : MonoBehaviour
 {
+
     public static List<Item> ans = new List<Item>();
-    public static int stage = 0;
+    int stage = 0;
     //보여지는 말풍선 텍스트
     public Text bubbleText;
     //보여지는 맞음,틀림 결과 텍스트
@@ -23,6 +24,9 @@ public class CheckAns : MonoBehaviour
     //결과
     bool answer;
 
+    //위쪽 설명 이미지
+    GameObject explainImage;
+
     void Start()
     {
         //초기화
@@ -32,9 +36,21 @@ public class CheckAns : MonoBehaviour
         Y = null;
         txts = new List<string>();
         answer = false;
+    
+        stage = UnUseBlockMain.stageTitleIndex;
+        explainImage = GameObject.Find("Stage");
 
+        ImageBinding();
         Checker();
         Result();
+    }
+    void ImageBinding()
+    {
+        if (stage == 1)
+        {
+            //1탄 설명에 사용할 이미지 적용
+            explainImage.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("BeforeStage1") as Sprite;
+        }
     }
 
     public void Result()
@@ -42,10 +58,16 @@ public class CheckAns : MonoBehaviour
         if (answer)
         {
             result.text = "맞았습니다!";
+            //정답시 스테이지 증가
+            UnUseBlockMain.stageTitleIndex++;
         }
         else
         {
             result.text = "틀렸습니다!";
+            //테스트를 위해 틀려도 스테이지 증가
+            UnUseBlockMain.stageTitleIndex++;
+            //돈증가 테스트
+            Money.CurMoney++;
         }
     }
 

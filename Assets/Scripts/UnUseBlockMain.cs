@@ -25,23 +25,30 @@ public class UnUseBlockMain : MonoBehaviour
     private bool flagAdd = true;
     private bool flagAll = true;
 
+    //각 블록을 식별할 수 있는 내부 인덱스
     private int useIndex = 0;
+    //함수 짝을 맞추기 위한 인덱스
     private int fxIndex = 0;
+    //함수에 블록을 추가할 때 위치를 잡아주는 인덱스
     private int fxstr = 0;
+    //조건 입력 창에서 사용되는 인덱스
     private int conIndex = 0;
     //스테이지 시작 인덱스를 기억 static 뿐만아니라 게임이 실행되는 내내 보관되어야하는 형태면 가능
-    private static int stageIndex = 0;
+    private int stageIndex = 0;
     //스테이지 타이틀을 달기 위한 인덱스 1부터 시작
-    private static int stageTitleIndex = 1;
-    //스테이지마다 사용될 버튼들 배열 만들기
-    private string[] stage = {"print","\"\"","/1",
-                              "print","Subject","/2",
-                              "print","X","+","Y","\"\"",",","/3",
-                              "print","X","+","Y","\"\"",",","/4",
-                              "if","모자","빨간색","==","print","\"\"","/5",
-                              "if","문자","1","==","print","\"\"","else","/6",
-                              "if","체크카드 잔액","=","메뉴","10000","8000","6000","4000","2000",">=","print","치킨","elif","떡볶이","else","짜장면","학식","라면","굶기","/7",
-                              "if","과제","==","0","&&","벚꽃","1","print","\"\"","/8"};
+    public static int stageTitleIndex = 1;
+    //스테이지마다 사용될 블록 배열
+    private string[] stage = {"0번","9","12","15","22",
+                              "29","36","44","64",
+                              "print","\"\"","/",
+                              "print","Subject","/",
+                              "print","X","+","Y","\"\"",",","/",
+                              "print","X","+","Y","\"\"",",","/",
+                              "if","모자","빨간색","==","print","\"\"","/",
+                              "if","문자","1","==","print","\"\"","else","/",
+                              "if","체크카드 잔액","=","메뉴","10000","8000","6000","4000","2000",">=","print","치킨","elif","떡볶이","else","짜장면","학식","라면","굶기","/",
+                              "if","과제","==","0","&&","벚꽃","1","print","\"\"","/"};
+
     //스테이지 타이틀
     private string[] stageTitle = {"0번","1탄","2탄","3탄","4탄","5탄","6탄","7탄","8탄"};
     //함수 배열
@@ -55,16 +62,31 @@ public class UnUseBlockMain : MonoBehaviour
     private void AddListItem()
     {
         Item itemTemp;
+        //블록 탐색을 위한 인덱스
+        stageIndex = Convert.ToInt32(stage[stageTitleIndex]);
+        // 타이틀 달아줌
+        title.text = stageTitle[stageTitleIndex];
+        
+        /* //스테이지별 시작 인덱스 테스트용
+        for (int i = 1; i <= 8; i++)
+        {
+
+            itemTemp = new Item();
+            int position = i;
+
+            itemTemp.Name = stage[Convert.ToInt32(stage[i])];
+
+            itemTemp.OnItemClick = new Button.ButtonClickedEvent();
+            itemTemp.OnItemClick.AddListener(() => ItemClick_Add(position));
+
+            this.ItemList.Add(itemTemp);
+        }*/
 
         for (int i = stageIndex; i < stage.Length; i++)
         {
-            //1탄의 끝 만나면 더이상 추가x
-            if (stage[i].Contains("/"))
+            // /를 만나면 종료
+            if (stage[i].Equals("/"))
             {
-                stageIndex = i + 1;
-                string[] st = stage[i].Split('/');
-                stageTitleIndex = Convert.ToInt32(st[1]);
-                title.text = stageTitle[stageTitleIndex];
                 break;
             }
 
@@ -240,7 +262,7 @@ public class UnUseBlockMain : MonoBehaviour
         useIndex++;
     }
 
-    //사용된 버튼 누르면 나오는 동작
+    //함수 누르면 나오는 동작
     public void usedButtonClick(int Index)
     {
         //추가 모드
@@ -632,7 +654,6 @@ public class UnUseBlockMain : MonoBehaviour
     public void ChangeSceneResult()
     {
         CheckAns.ans.Clear();
-        CheckAns.stage = stageTitleIndex;
 
         for (int i = 0; i < UsedItemList.Count; i++)
         {
