@@ -34,22 +34,22 @@ public class UnUseBlockMain : MonoBehaviour
     //스테이지 타이틀을 달기 위한 인덱스 1부터 시작
     private static int stageTitleIndex = 1;
     //스테이지마다 사용될 버튼들 배열 만들기
-    private string[] stage = {"print","\"\"","X","+","if","Subject","/1",
+    private string[] stage = {"print","\"\"","/1",
                               "print","Subject","/2",
-                              "print","X","+","Y","\"\"","/3",
-                              "print","X","+","Y","\"\"","/4",
+                              "print","X","+","Y","\"\"",",","/3",
+                              "print","X","+","Y","\"\"",",","/4",
                               "if","모자","빨간색","==","print","\"\"","/5",
                               "if","문자","1","==","print","\"\"","else","/6",
                               "if","체크카드 잔액","=","메뉴","10000","8000","6000","4000","2000",">=","print","치킨","elif","떡볶이","else","짜장면","학식","라면","굶기","/7",
                               "if","과제","==","0","&&","벚꽃","1","print","\"\"","/8"};
     //스테이지 타이틀
-    private string[] stageTitle = {"0번","1탄"};
+    private string[] stageTitle = {"0번","1탄","2탄","3탄","4탄","5탄","6탄","7탄","8탄"};
     //함수 배열
     private string[] fx = { "print", "if" }; //else, elif
     //변수 배열
     private string[] var = { "\"\"", "Subject", "X", "Y" }; 
     //부가적인 문자
-    private string[] extraChar = { "+", "==", "모자", "빨간색" }; //문자, &&, 벚꽃, 과제, 1, 0, >=, 치킨, 떡볶이, 짜장면, 학식, 라면, 굶기, 10000, 8000, 6000, 4000, 2000, 체크카드 잔액, =, 메뉴
+    private string[] extraChar = { "+", "==", "모자", "빨간색" ,","}; //문자, &&, 벚꽃, 과제, 1, 0, >=, 치킨, 떡볶이, 짜장면, 학식, 라면, 굶기, 10000, 8000, 6000, 4000, 2000, 체크카드 잔액, =, 메뉴
 
     //사용할 버튼 리스트
     private void AddListItem()
