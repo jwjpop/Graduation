@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class CheckAns : MonoBehaviour
 {
-
+    //돈
+    public Text CurText;
     public static List<Item> ans = new List<Item>();
     int stage = 0;
     //보여지는 말풍선 텍스트
@@ -36,7 +37,8 @@ public class CheckAns : MonoBehaviour
         Y = null;
         txts = new List<string>();
         answer = false;
-    
+
+        CurText.text = DataControl.CurMoney.ToString();
         stage = UnUseBlockMain.stageTitleIndex;
         explainImage = GameObject.Find("Stage");
 
@@ -67,7 +69,12 @@ public class CheckAns : MonoBehaviour
             //테스트를 위해 틀려도 스테이지 증가
             UnUseBlockMain.stageTitleIndex++;
             //돈증가 테스트
-            Money.CurMoney++;
+            DataControl.CurMoney++;
+            CurText.text = DataControl.CurMoney.ToString();
+            //저장 테스트
+            PlayerPrefs.SetInt("stage",UnUseBlockMain.stageTitleIndex);
+            PlayerPrefs.SetInt("money", DataControl.CurMoney);
+            PlayerPrefs.Save();
         }
     }
 
@@ -242,7 +249,7 @@ public class CheckAns : MonoBehaviour
                            "else시작메뉴=굶기else끝" +
                            "print시작메뉴print끝"))
             {
-                int money = Money.CurMoney;
+                int money = DataControl.CurMoney;
                 if (money >= 10000)
                 {
                     bubbleText.text = "오늘 저녁은 치킨이닭!";

@@ -36,7 +36,7 @@ public class UnUseBlockMain : MonoBehaviour
     //스테이지 시작 인덱스를 기억 static 뿐만아니라 게임이 실행되는 내내 보관되어야하는 형태면 가능
     private int stageIndex = 0;
     //스테이지 타이틀을 달기 위한 인덱스 1부터 시작
-    public static int stageTitleIndex = 1;
+    public static int stageTitleIndex = 0;
     //스테이지마다 사용될 블록 배열
     private string[] stage = {"0번","9","12","15","22",
                               "29","36","44","64",

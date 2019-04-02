@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class BeforeCodingScript : MonoBehaviour
 {
+    // 돈
+    public Text CurText;
     //패널 위의 텍스트
     public Text txtScript;
     //말풍선 텍스트
@@ -46,6 +48,7 @@ public class BeforeCodingScript : MonoBehaviour
         //스크립트 시작
         txtScript.text = script[scriptStartIndex];
 
+        CurText.text = DataControl.CurMoney.ToString();
         beforePanel = GameObject.Find("BeforePanel");
         bubble = GameObject.Find("Bubble");
         bubble.SetActive(false);

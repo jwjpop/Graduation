@@ -7,12 +7,19 @@ public class BuyItem : MonoBehaviour
 {
     public Text CurText;
 
+    void Start()
+    {
+        CurText.text = DataControl.CurMoney.ToString();
+    }
+
    public void BuyItem1()
     {
-        if (Money.CurMoney >= 30000)
+        if (DataControl.CurMoney >= 1)
         {
-            Money.CurMoney -= 30000;
-            CurText.text = Money.CurMoney.ToString();
+            DataControl.CurMoney -= 1;
+            PlayerPrefs.SetInt("money", DataControl.CurMoney);
+            PlayerPrefs.Save();
+            CurText.text = DataControl.CurMoney.ToString();
         }
         else
         {
@@ -21,10 +28,12 @@ public class BuyItem : MonoBehaviour
     }
     public void BuyItem2()
     {
-        if (Money.CurMoney >= 50000)
+        if (DataControl.CurMoney >= 2)
         {
-            Money.CurMoney -= 50000;
-            CurText.text = Money.CurMoney.ToString();
+            DataControl.CurMoney -= 2;
+            PlayerPrefs.SetInt("money", DataControl.CurMoney);
+            PlayerPrefs.Save();
+            CurText.text = DataControl.CurMoney.ToString();
         }
         else
         {
@@ -33,10 +42,12 @@ public class BuyItem : MonoBehaviour
     }
     public void BuyItem3()
     {
-        if (Money.CurMoney >= 100000)
+        if (DataControl.CurMoney >= 3)
         {
-            Money.CurMoney -= 100000;
-            CurText.text = Money.CurMoney.ToString();
+            DataControl.CurMoney -= 3;
+            PlayerPrefs.SetInt("money", DataControl.CurMoney);
+            PlayerPrefs.Save();
+            CurText.text = DataControl.CurMoney.ToString();
         }
         else
         {
@@ -45,10 +56,12 @@ public class BuyItem : MonoBehaviour
     }
     public void BuyItem4()
     {
-        if (Money.CurMoney >= 300000)
+        if (DataControl.CurMoney >= 5)
         {
-            Money.CurMoney -= 300000;
-            CurText.text = Money.CurMoney.ToString();
+            DataControl.CurMoney -= 5;
+            PlayerPrefs.SetInt("money", DataControl.CurMoney);
+            PlayerPrefs.Save();
+            CurText.text = DataControl.CurMoney.ToString();
         }
         else
         {
