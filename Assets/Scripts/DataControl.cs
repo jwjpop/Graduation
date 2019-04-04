@@ -37,6 +37,7 @@ public class DataControl : MonoBehaviour
         UnUseBlockMain.stageTitleIndex = 1;
         PlayerPrefs.SetInt("stage", UnUseBlockMain.stageTitleIndex);
         PlayerPrefs.Save();
+        Debug.Log(UnUseBlockMain.stageTitleIndex);
     }
     
 }

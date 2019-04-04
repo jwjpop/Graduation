@@ -48,6 +48,7 @@ public class BeforeCodingScript : MonoBehaviour
         //스크립트 시작
         txtScript.text = script[scriptStartIndex];
 
+
         CurText.text = DataControl.CurMoney.ToString();
         beforePanel = GameObject.Find("BeforePanel");
         bubble = GameObject.Find("Bubble");

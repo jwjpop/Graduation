@@ -52,11 +52,14 @@ public class UnUseBlockMain : MonoBehaviour
     //스테이지 타이틀
     private string[] stageTitle = {"0번","1탄","2탄","3탄","4탄","5탄","6탄","7탄","8탄"};
     //함수 배열
-    private string[] fx = { "print", "if" }; //else, elif
+    private string[] fx = { "print", "if","else","elif"};
     //변수 배열
     private string[] var = { "\"\"", "Subject", "X", "Y" }; 
     //부가적인 문자
-    private string[] extraChar = { "+", "==", "모자", "빨간색" ,","}; //문자, &&, 벚꽃, 과제, 1, 0, >=, 치킨, 떡볶이, 짜장면, 학식, 라면, 굶기, 10000, 8000, 6000, 4000, 2000, 체크카드 잔액, =, 메뉴
+    private string[] extraChar = { "+", "==", "모자", "빨간색" ,",","문자", "&&", "벚꽃",
+                                   "과제","1","0",">=","치킨","떡볶이","짜장면","학식","라면",
+                                   "굶기","10000","8000","6000","4000","2000","체크카드 잔액",
+                                   "=","메뉴"};
 
     //사용할 버튼 리스트
     private void AddListItem()
@@ -414,7 +417,7 @@ public class UnUseBlockMain : MonoBehaviour
                     if (stage[position].Equals(fx[i]))
                     {
                         AddUseListItem(stage[position] + "시작");
-                        if (stage[position].Equals("if"))
+                        if (stage[position].Equals("if") || stage[position].Equals("elif"))
                             AddUseListItem("조건");
                         AddUseListItem(stage[position] + "끝");
                         fxIndex++;
@@ -451,7 +454,7 @@ public class UnUseBlockMain : MonoBehaviour
                     if (stage[position].Equals(fx[i]))
                     {
                         AddUseListItem(stage[position] + "시작");
-                        if (stage[position].Equals("if"))
+                        if (stage[position].Equals("if") || stage[position].Equals("elif"))
                             AddUseListItem("조건");
                         AddUseListItem(stage[position] + "끝");
                         fxIndex++;
