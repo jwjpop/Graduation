@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 328341580}
   - component: {fileID: 328341579}
   m_Layer: 5
-  m_Name: ButtonSem1_2_2
+  m_Name: ButtonSem1_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 437767762}
   - component: {fileID: 437767761}
   m_Layer: 5
-  m_Name: ButtonSem1_2_1
+  m_Name: ButtonSem1_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -869,7 +869,7 @@ GameObject:
   - component: {fileID: 548144075}
   - component: {fileID: 548144074}
   m_Layer: 5
-  m_Name: ButtonSem1_1_1
+  m_Name: ButtonSem1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -934,7 +934,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 548144075}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1391617811}
+        m_MethodName: ButtonClicked
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 548144074}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &548144075
@@ -1211,7 +1222,7 @@ GameObject:
   - component: {fileID: 824965751}
   - component: {fileID: 824965750}
   m_Layer: 5
-  m_Name: ButtonSem1_1_4
+  m_Name: ButtonSem1_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1276,7 +1287,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 824965751}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1391617811}
+        m_MethodName: ButtonClicked
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 824965750}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &824965751
@@ -1329,7 +1351,7 @@ GameObject:
   - component: {fileID: 887845753}
   - component: {fileID: 887845752}
   m_Layer: 5
-  m_Name: ButtonSem1_1_2
+  m_Name: ButtonSem1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1394,7 +1416,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 887845753}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1391617811}
+        m_MethodName: ButtonClicked
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 887845752}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &887845753
@@ -1880,6 +1913,7 @@ GameObject:
   - component: {fileID: 1391617808}
   - component: {fileID: 1391617807}
   - component: {fileID: 1391617810}
+  - component: {fileID: 1391617811}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1961,6 +1995,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77f2b0ba0c829ad4990533f2f9a36b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1391617811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391617806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02036bc39f3b42b4c9e4ec2598b0553b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1399644554
@@ -2172,7 +2218,7 @@ GameObject:
   - component: {fileID: 1459679012}
   - component: {fileID: 1459679011}
   m_Layer: 5
-  m_Name: seme1_1
+  m_Name: seme1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2568,7 +2614,7 @@ GameObject:
   - component: {fileID: 1635704200}
   - component: {fileID: 1635704199}
   m_Layer: 5
-  m_Name: ButtonSem1_2_4
+  m_Name: ButtonSem1_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2945,7 +2991,7 @@ GameObject:
   - component: {fileID: 1718919272}
   - component: {fileID: 1718919271}
   m_Layer: 5
-  m_Name: seme1_2
+  m_Name: seme2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3698,7 +3744,7 @@ GameObject:
   - component: {fileID: 2000303346}
   - component: {fileID: 2000303345}
   m_Layer: 5
-  m_Name: ButtonSem1_2_3
+  m_Name: ButtonSem1_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3816,7 +3862,7 @@ GameObject:
   - component: {fileID: 2044104282}
   - component: {fileID: 2044104281}
   m_Layer: 5
-  m_Name: ButtonSem1_1_3
+  m_Name: ButtonSem1_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3881,7 +3927,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2044104282}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1391617811}
+        m_MethodName: ButtonClicked
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2044104281}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2044104282

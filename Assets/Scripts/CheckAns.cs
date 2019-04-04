@@ -39,7 +39,14 @@ public class CheckAns : MonoBehaviour
         answer = false;
 
         CurText.text = DataControl.CurMoney.ToString();
-        stage = UnUseBlockMain.stageTitleIndex;
+        if(DataControl.where==1)
+        {
+            stage = ReviewScript.clickedStage;
+        }
+        else
+        {
+            stage = UnUseBlockMain.stageTitleIndex;
+        }
         explainImage = GameObject.Find("Stage");
 
         ImageBinding();
@@ -60,21 +67,36 @@ public class CheckAns : MonoBehaviour
         if (answer)
         {
             result.text = "맞았습니다!";
-            //정답시 스테이지 증가
-            UnUseBlockMain.stageTitleIndex++;
+            if (DataControl.where == 1)
+            {
+
+            }
+            else
+            {
+                //정답시 스테이지 증가
+                UnUseBlockMain.stageTitleIndex++;
+            }
         }
         else
         {
             result.text = "틀렸습니다!";
-            //테스트를 위해 틀려도 스테이지 증가
-            UnUseBlockMain.stageTitleIndex++;
-            //돈증가 테스트
-            DataControl.CurMoney++;
-            CurText.text = DataControl.CurMoney.ToString();
-            //저장 테스트
-            PlayerPrefs.SetInt("stage",UnUseBlockMain.stageTitleIndex);
-            PlayerPrefs.SetInt("money", DataControl.CurMoney);
-            PlayerPrefs.Save();
+            if (DataControl.where == 1)
+            {
+
+            }
+            else
+            {
+                //테스트를 위해 틀려도 스테이지 증가
+                UnUseBlockMain.stageTitleIndex++;
+                //돈증가 테스트
+                DataControl.CurMoney++;
+                CurText.text = DataControl.CurMoney.ToString();
+                //저장 테스트
+                PlayerPrefs.SetInt("stage", UnUseBlockMain.stageTitleIndex);
+                PlayerPrefs.SetInt("money", DataControl.CurMoney);
+                PlayerPrefs.Save();
+            }
+            
         }
     }
 

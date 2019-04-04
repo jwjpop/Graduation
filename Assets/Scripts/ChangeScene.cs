@@ -24,7 +24,7 @@ public void ChangeSceneHomeWork()
     {
         SceneManager.LoadScene("HistoryScene");
     }
-    public void ChangeSceneReview()
+    public void ChangeSceneInven()
     {
         SceneManager.LoadScene("InvenScene");
     }
@@ -40,5 +40,4 @@ public void ChangeSceneHomeWork()
     {
         SceneManager.LoadScene("BeforeCodingScene");
     }
-
 }

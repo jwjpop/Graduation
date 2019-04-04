@@ -41,12 +41,21 @@ public class BeforeCodingScript : MonoBehaviour
 
     void Start()
     {
-        //현재 스테이지 받아옴
-        stage = UnUseBlockMain.stageTitleIndex;
-        //스크립트에 사용할 인덱스로 변환
-        scriptStartIndex = Convert.ToInt32(script[stage]);
-        //스크립트 시작
-        txtScript.text = script[scriptStartIndex];
+        if (DataControl.where == 1)
+        {
+            //현재 스테이지 받아옴
+            stage = ReviewScript.clickedStage;
+            //스크립트에 사용할 인덱스로 변환
+            scriptStartIndex = Convert.ToInt32(script[stage]);
+            //스크립트 시작
+            txtScript.text = script[scriptStartIndex];
+        }
+        else
+        {
+            stage = UnUseBlockMain.stageTitleIndex;
+            scriptStartIndex = Convert.ToInt32(script[stage]);
+            txtScript.text = script[scriptStartIndex];
+        }
 
 
         CurText.text = DataControl.CurMoney.ToString();
@@ -87,7 +96,17 @@ public class BeforeCodingScript : MonoBehaviour
         if (stage == 1)
         {
             if (script[scriptStartIndex].Equals("/"))
-                SceneManager.LoadScene("CodingScene");
+            {
+                if(DataControl.where==1)
+                {
+                    SceneManager.LoadScene("ReviewScene");
+
+                }
+                else
+                {
+                    SceneManager.LoadScene("CodingScene");
+                }
+            }
             else
             {
                 if (script[scriptStartIndex].Equals("문자는 꼭 따옴표(\"\")가 안에 들어가야해!"))
@@ -111,31 +130,87 @@ public class BeforeCodingScript : MonoBehaviour
         }
         else if(stage == 2)
         {
-            SceneManager.LoadScene("CodingScene");
+            if (DataControl.where == 1)
+            {
+                SceneManager.LoadScene("ReviewScene");
+
+            }
+            else
+            {
+                SceneManager.LoadScene("CodingScene");
+            }
         }
         else if (stage == 3)
         {
-            SceneManager.LoadScene("CodingScene");
+            if (DataControl.where == 1)
+            {
+                SceneManager.LoadScene("ReviewScene");
+
+            }
+            else
+            {
+                SceneManager.LoadScene("CodingScene");
+            }
         }
         else if (stage == 4)
         {
-            SceneManager.LoadScene("CodingScene");
+            if (DataControl.where == 1)
+            {
+                SceneManager.LoadScene("ReviewScene");
+
+            }
+            else
+            {
+                SceneManager.LoadScene("CodingScene");
+            }
         }
         else if (stage == 5)
         {
-            SceneManager.LoadScene("CodingScene");
+            if (DataControl.where == 1)
+            {
+                SceneManager.LoadScene("ReviewScene");
+
+            }
+            else
+            {
+                SceneManager.LoadScene("CodingScene");
+            }
         }
         else if (stage == 6)
         {
-            SceneManager.LoadScene("CodingScene");
+            if (DataControl.where == 1)
+            {
+                SceneManager.LoadScene("ReviewScene");
+
+            }
+            else
+            {
+                SceneManager.LoadScene("CodingScene");
+            }
         }
         else if (stage == 7)
         {
-            SceneManager.LoadScene("CodingScene");
+            if (DataControl.where == 1)
+            {
+                SceneManager.LoadScene("ReviewScene");
+
+            }
+            else
+            {
+                SceneManager.LoadScene("CodingScene");
+            }
         }
         else if (stage == 8)
         {
-            SceneManager.LoadScene("CodingScene");
+            if (DataControl.where == 1)
+            {
+                SceneManager.LoadScene("ReviewScene");
+
+            }
+            else
+            {
+                SceneManager.LoadScene("CodingScene");
+            }
         }
     }
 }

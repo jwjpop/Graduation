@@ -7,7 +7,10 @@ public class DataControl : MonoBehaviour
 {
     //돈 관리
     public static int CurMoney = 0 ;
+    //어디에서 접근하는지 나타냄
+    public static int where = 0;
     public Text CurText;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +41,11 @@ public class DataControl : MonoBehaviour
         PlayerPrefs.SetInt("stage", UnUseBlockMain.stageTitleIndex);
         PlayerPrefs.Save();
         Debug.Log(UnUseBlockMain.stageTitleIndex);
+    }
+
+    public void whereControl()
+    {
+        where = 0;
     }
     
 }

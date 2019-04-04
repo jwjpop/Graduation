@@ -20,6 +20,7 @@ public class UnUseBlockMain : MonoBehaviour
     public Text flagAddText;
     public Text flagAllText;
     public Text title;
+    public Text codeLoad;
     public InputField ConInput;
 
     private bool flagAdd = true;
@@ -65,10 +66,17 @@ public class UnUseBlockMain : MonoBehaviour
     private void AddListItem()
     {
         Item itemTemp;
-        //블록 탐색을 위한 인덱스
-        stageIndex = Convert.ToInt32(stage[stageTitleIndex]);
         // 타이틀 달아줌
-        title.text = stageTitle[stageTitleIndex];
+        if (DataControl.where == 1)
+        {
+            stageIndex = Convert.ToInt32(stage[ReviewScript.clickedStage]);
+            title.text = stageTitle[ReviewScript.clickedStage];
+        }
+        else
+        {
+            stageIndex = Convert.ToInt32(stage[stageTitleIndex]);
+            title.text = stageTitle[stageTitleIndex];
+        }
         
         /* //스테이지별 시작 인덱스 테스트용
         for (int i = 1; i <= 8; i++)
@@ -159,6 +167,11 @@ public class UnUseBlockMain : MonoBehaviour
 
         AddListItem();
         this.Binding();
+
+        
+        String fullName = PlayerPrefs.GetString("Code"+ReviewScript.clickedStage,"");
+        codeLoad.text = fullName;
+
     }
 
     //사용된 버튼 리스트
@@ -666,5 +679,28 @@ public class UnUseBlockMain : MonoBehaviour
             }
         }
         SceneManager.LoadScene("ResultScene");
+    }
+
+    public void SaveCode()
+    {
+        String fullName = "";
+
+        for (int i = 0; i < UsedItemList.Count; i++)
+        {
+            if (UsedItemList[i] != null)
+            {
+                fullName = fullName + UsedItemList[i].Name + "/";
+            }
+        }
+        if (DataControl.where == 1)
+        {
+            PlayerPrefs.SetString("Code" + ReviewScript.clickedStage, fullName);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            PlayerPrefs.SetString("Code" + UnUseBlockMain.stageTitleIndex, fullName);
+            PlayerPrefs.Save();
+        }
     }
 }
