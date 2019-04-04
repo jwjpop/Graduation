@@ -18,7 +18,7 @@ public class BeforeCodingScript : MonoBehaviour
     //말풍선
     GameObject bubble;
     //위쪽 설명 이미지
-    GameObject explainImage;
+    GameObject stageImage;
     //아래쪽 코딩 이미지
     GameObject codingImage;
     
@@ -52,7 +52,7 @@ public class BeforeCodingScript : MonoBehaviour
         beforePanel = GameObject.Find("BeforePanel");
         bubble = GameObject.Find("Bubble");
         bubble.SetActive(false);
-        explainImage = GameObject.Find("Stage");
+        stageImage = GameObject.Find("StageImage");
         codingImage = GameObject.Find("CodingImage");
 
         ImageBinding();
@@ -71,7 +71,12 @@ public class BeforeCodingScript : MonoBehaviour
         if(stage == 1)
         {
             //1탄 설명에 사용할 이미지 적용
-            explainImage.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("BeforeStage1") as Sprite;
+            stageImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("BeforeStage1") as Sprite;
+        }
+        else if (stage == 2)
+        {
+            //1탄 설명에 사용할 이미지 적용
+            stageImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("BeforeStage2") as Sprite;
         }
     }
     //스테이지별 모든 이미지, 스크립트 변화가 이곳에서 이루어짐
