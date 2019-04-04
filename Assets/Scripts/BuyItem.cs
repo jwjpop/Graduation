@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class BuyItem : MonoBehaviour
 {
+    private GameObject panelNoMoney;
     public Text CurText;
 
     void Start()
     {
         CurText.text = DataControl.CurMoney.ToString();
+        panelNoMoney = GameObject.Find("PanelNoMoney");
+        panelNoMoney.SetActive(false);
     }
 
    public void BuyItem1()
@@ -23,7 +26,7 @@ public class BuyItem : MonoBehaviour
         }
         else
         {
-            //안내 메세지 띄우기
+            panelNoMoney.SetActive(true);
         }
     }
     public void BuyItem2()
@@ -37,7 +40,7 @@ public class BuyItem : MonoBehaviour
         }
         else
         {
-            //안내 메세지 띄우기
+            panelNoMoney.SetActive(true);
         }
     }
     public void BuyItem3()
@@ -51,7 +54,7 @@ public class BuyItem : MonoBehaviour
         }
         else
         {
-            //안내 메세지 띄우기
+            panelNoMoney.SetActive(true);
         }
     }
     public void BuyItem4()
@@ -65,7 +68,12 @@ public class BuyItem : MonoBehaviour
         }
         else
         {
-            //안내 메세지 띄우기
+            panelNoMoney.SetActive(true);
         }
+    }
+
+    public void NoMoneyOk()
+    {
+        panelNoMoney.SetActive(false);
     }
 }
