@@ -209,7 +209,7 @@ public class UnUseBlockMain : MonoBehaviour
         useitemobjectTemp.Item.onClick = new Button.ButtonClickedEvent();
         useitemobjectTemp.Item.onClick.AddListener(() => usedButtonClick(Index));
 
-        //순서 알기 쉽게 디버깅용 하이어라키쪽
+        //순서 알기 쉽게 디버깅용 하이어라키쪽 ★
         usebtnItemTemp.name = itemTemp.Name + "_" + Index + " " + fxIndex;
         usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
         useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(194, 70);
@@ -304,7 +304,7 @@ public class UnUseBlockMain : MonoBehaviour
                                     Debug.Log("함수모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
                                     fxstr = UsedItemList.IndexOf(UsedItemList[i]) + 1;
                                     FlagInnerChange();
-                                    Debug.Log(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
+                                    //여기 네임 규칙이 ★ 표시해놓은 곳이랑 같아야함
                                     buttonHighlight = GameObject.Find(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
                                     buttonHighlight.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
                                     break;

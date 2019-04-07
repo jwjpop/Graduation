@@ -10,6 +10,8 @@ public class DataControl : MonoBehaviour
     //어디에서 접근하는지 나타냄
     public static int where = 0;
     public Text CurText;
+
+    private GameObject buttonUnderLeft;
     
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,9 @@ public class DataControl : MonoBehaviour
         Debug.Log(UnUseBlockMain.stageTitleIndex);
         CurMoney = PlayerPrefs.GetInt("money",300000);
         CurText.GetComponent<Text>().text = CurMoney.ToString();
+
+        buttonUnderLeft = GameObject.Find("ButtonUnderLeft");
+        buttonUnderLeft.GetComponent<Button>().interactable = false;
     }
 
     public void moneyReset()
