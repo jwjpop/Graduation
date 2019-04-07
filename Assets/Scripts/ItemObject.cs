@@ -7,6 +7,6 @@ public class ItemObject : MonoBehaviour
 {
     public Button Item;
     public Text Name;
-    public Button btnCon;
     public Text Condition;
+    
 }

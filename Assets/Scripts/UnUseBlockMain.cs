@@ -10,6 +10,8 @@ public class UnUseBlockMain : MonoBehaviour
     public GameObject ItemObject;
     private GameObject panel;
     private GameObject upDownPanel;
+    private GameObject ButtonAdd;
+    private GameObject buttonHighlight;
 
     public Transform Content;
     public Transform UseContent;
@@ -122,8 +124,8 @@ public class UnUseBlockMain : MonoBehaviour
             btnItemTemp = Instantiate(this.ItemObject) as GameObject;
             itemobjectTemp = btnItemTemp.GetComponent<ItemObject>();
 
-            btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-            itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(100, 30);
+            btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("fx") as Sprite;
+            itemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(70, 70);
             itemobjectTemp.Condition.text = null;
             
             //만약 변수면
@@ -131,7 +133,7 @@ public class UnUseBlockMain : MonoBehaviour
             {
                 if (item.Name.Equals(var[i]))
                 {
-                    btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("variable") as Sprite;
+                    btnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("var") as Sprite;
                     break;
                 }
             }
@@ -148,7 +150,6 @@ public class UnUseBlockMain : MonoBehaviour
 
             itemobjectTemp.Name.text = item.Name;
             itemobjectTemp.Item.onClick = item.OnItemClick;
-            itemobjectTemp.btnCon.onClick = item.OnItemClick;
 
             btnItemTemp.transform.SetParent(this.Content);
             btnItemTemp.transform.localScale = Vector3.one;
@@ -163,12 +164,13 @@ public class UnUseBlockMain : MonoBehaviour
         panel.SetActive(false);
         upDownPanel = GameObject.Find("UpDownPanel");
         upDownPanel.SetActive(false);
+        ButtonAdd = GameObject.Find("Button_FlagAdd");
 
         AddListItem();
         this.Binding();
 
-        
-        String fullName = PlayerPrefs.GetString("Code"+ReviewScript.clickedStage,"");
+        //저장된 코드 가져오기 소스
+        //String fullName = PlayerPrefs.GetString("Code"+ReviewScript.clickedStage,"");
         //codeLoad.text = fullName;
 
     }
@@ -209,8 +211,8 @@ public class UnUseBlockMain : MonoBehaviour
 
         //순서 알기 쉽게 디버깅용 하이어라키쪽
         usebtnItemTemp.name = itemTemp.Name + "_" + Index + " " + fxIndex;
-        usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("condition") as Sprite;
-        useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(200, 40);
+        usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+        useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(194, 70);
         useitemobjectTemp.Condition.text = null;
         
         //만약 변수라면
@@ -218,7 +220,8 @@ public class UnUseBlockMain : MonoBehaviour
         {
             if (name.Equals(var[i]))
             {
-                usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("variable") as Sprite;
+                usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("var") as Sprite;
+                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(70, 70);
                 useitemobjectTemp.Item.onClick = new Button.ButtonClickedEvent();
                 useitemobjectTemp.Item.onClick.AddListener(() => condition(Index));
                 break;
@@ -231,6 +234,7 @@ public class UnUseBlockMain : MonoBehaviour
             if (name.Equals(extraChar[i]))
             {
                 usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("sign") as Sprite;
+                useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(70, 70);
                 useitemobjectTemp.Item.onClick = new Button.ButtonClickedEvent();
                 useitemobjectTemp.Item.onClick.AddListener(() => extra(Index));
                 break;
@@ -300,6 +304,9 @@ public class UnUseBlockMain : MonoBehaviour
                                     Debug.Log("함수모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
                                     fxstr = UsedItemList.IndexOf(UsedItemList[i]) + 1;
                                     FlagInnerChange();
+                                    Debug.Log(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlight = GameObject.Find(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlight.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
                                     break;
                                 }
                                 //함수 끝이면
@@ -501,13 +508,13 @@ public class UnUseBlockMain : MonoBehaviour
         if (flagAdd)
         {
             flagAdd = false;
-            flagAddText.text = "제거";
             flagAll = true;
+            ButtonAdd.GetComponent<Image>().sprite = Resources.Load<Sprite>("modeDelete") as Sprite;
         }
         else
         {
             flagAdd = true;
-            flagAddText.text = "추가";
+            ButtonAdd.GetComponent<Image>().sprite = Resources.Load<Sprite>("modeAdd") as Sprite;
         }
     }
 
