@@ -82,7 +82,7 @@ public class CheckAns : MonoBehaviour
             result.text = "틀렸습니다!";
             if (DataControl.where == 1)
             {
-
+                result.text = "복습중!";
             }
             else
             {

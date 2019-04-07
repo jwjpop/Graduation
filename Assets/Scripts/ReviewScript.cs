@@ -7,6 +7,7 @@ public class ReviewScript : MonoBehaviour
 {
     string[] buttonName;
     GameObject[] seme = new GameObject[9];
+    GameObject[] semeButton = new GameObject[33];
     public static int clickedStage;
 
     // Start is called before the first frame update
@@ -17,7 +18,7 @@ public class ReviewScript : MonoBehaviour
             seme[i] = GameObject.Find("seme" + i);
             seme[i].SetActive(false);
         }
-
+        
         if (UnUseBlockMain.stageTitleIndex >= 1)
         {
             seme[1].SetActive(true);
@@ -26,7 +27,24 @@ public class ReviewScript : MonoBehaviour
         {
             seme[2].SetActive(true);
         }
+        
+        for (int i = 1; i <= 8; i++)
+        {
+            semeButton[i] = GameObject.Find("ButtonSem_" + i);
+            if (semeButton[i] != null)
+            {
+                semeButton[i].GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                break;
+            }
+        }
 
+        for(int i=1;i<= UnUseBlockMain.stageTitleIndex;i++)
+        {
+            semeButton[i].GetComponent<Button>().interactable = true;
+        }
     }
 
     //버튼이 눌리면
@@ -37,8 +55,8 @@ public class ReviewScript : MonoBehaviour
         
         if(clickedStage<UnUseBlockMain.stageTitleIndex)
         {
-            //String fullName = PlayerPrefs.GetString("Code"+clickedStage,"");
-            //Debug.Log(fullName);
+            String fullName = PlayerPrefs.GetString("Code"+clickedStage,"");
+            Debug.Log(fullName);
             DataControl.where = 1;
             SceneManager.LoadScene("ReviewScene");
             

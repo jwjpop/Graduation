@@ -19,9 +19,9 @@ public class UnUseBlockMain : MonoBehaviour
     public List<Item> ItemList;
     public List<Item> UsedItemList;
 
-    public Text flagAddText;
     public Text title;
-    //public Text codeLoad;
+    public Text codeLoad;
+    public Text CurText;
     public InputField ConInput;
 
     private bool flagAdd = true;
@@ -165,13 +165,22 @@ public class UnUseBlockMain : MonoBehaviour
         upDownPanel = GameObject.Find("UpDownPanel");
         upDownPanel.SetActive(false);
         ButtonAdd = GameObject.Find("Button_FlagAdd");
+        CurText.GetComponent<Text>().text = DataControl.CurMoney.ToString();
 
         AddListItem();
         this.Binding();
 
-        //저장된 코드 가져오기 소스
-        //String fullName = PlayerPrefs.GetString("Code"+ReviewScript.clickedStage,"");
-        //codeLoad.text = fullName;
+        if (DataControl.where == 1)
+        {
+            //저장된 코드 가져오기 소스
+            String fullName = PlayerPrefs.GetString("Code" + ReviewScript.clickedStage, "");
+            codeLoad.text = fullName;
+        }
+        else
+        {
+            String fullName = PlayerPrefs.GetString("Code" + stageTitleIndex, "");
+            codeLoad.text = fullName;
+        }
 
     }
 
