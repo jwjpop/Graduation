@@ -18,9 +18,8 @@ public class UnUseBlockMain : MonoBehaviour
     public List<Item> UsedItemList;
 
     public Text flagAddText;
-    public Text flagAllText;
     public Text title;
-    public Text codeLoad;
+    //public Text codeLoad;
     public InputField ConInput;
 
     private bool flagAdd = true;
@@ -170,7 +169,7 @@ public class UnUseBlockMain : MonoBehaviour
 
         
         String fullName = PlayerPrefs.GetString("Code"+ReviewScript.clickedStage,"");
-        codeLoad.text = fullName;
+        //codeLoad.text = fullName;
 
     }
 
@@ -504,7 +503,6 @@ public class UnUseBlockMain : MonoBehaviour
             flagAdd = false;
             flagAddText.text = "제거";
             flagAll = true;
-            flagAllText.text = "전체 모드";
         }
         else
         {
@@ -519,12 +517,10 @@ public class UnUseBlockMain : MonoBehaviour
         if (flagAll)
         {
             flagAll = false;
-            flagAllText.text = "함수 내부";
         }
         else
         {
             flagAll = true;
-            flagAllText.text = "전체 모드";
 
         }
     }
