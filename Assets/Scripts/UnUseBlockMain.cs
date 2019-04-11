@@ -290,6 +290,11 @@ public class UnUseBlockMain : MonoBehaviour
         }
         fxstr++;
         useIndex++;
+
+        if(name.Contains("끝"))
+        {
+            fxIndex++;
+        }
     }
 
     //함수 누르면 나오는 동작
@@ -450,7 +455,6 @@ public class UnUseBlockMain : MonoBehaviour
                         if (stage[position].Equals("if") || stage[position].Equals("elif"))
                             AddUseListItem("조건");
                         AddUseListItem(stage[position] + "끝");
-                        fxIndex++;
                         break;
                     }
                 }
@@ -487,7 +491,6 @@ public class UnUseBlockMain : MonoBehaviour
                         if (stage[position].Equals("if") || stage[position].Equals("elif"))
                             AddUseListItem("조건");
                         AddUseListItem(stage[position] + "끝");
-                        fxIndex++;
                         break;
                     }
                 }
@@ -720,6 +723,13 @@ public class UnUseBlockMain : MonoBehaviour
     
     public void LoadCode()
     {
+        for(int i=0;i<UsedItemList.Count;i++)
+        {
+            Destroy(UsedItemList[i].game);
+        }
+
+        UsedItemList.RemoveRange(0,UsedItemList.Count);
+
         int UsedCount = PlayerPrefs.GetInt("UsedCount", 0);
         ItemCopy cp;
 
