@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class UnUseBlockMain : MonoBehaviour
 {
@@ -695,24 +697,46 @@ public class UnUseBlockMain : MonoBehaviour
 
     public void SaveCode()
     {
-        String fullName = "";
+        for (int i=0;i<UsedItemList.Count;i++)
+        {
+            var binaryFormatter = new BinaryFormatter();
+            var memoryStream = new MemoryStream();
+            ItemCopy itemCopy = new ItemCopy();
 
-        for (int i = 0; i < UsedItemList.Count; i++)
+            itemCopy.Name = UsedItemList[i].Name;
+            itemCopy.Index = UsedItemList[i].Index;
+            itemCopy.fxIndex = UsedItemList[i].fxIndex;
+            itemCopy.condition = UsedItemList[i].condition;
+            itemCopy.OnItemClick = UsedItemList[i].OnItemClick;
+            
+            binaryFormatter.Serialize(memoryStream, itemCopy);
+            
+            PlayerPrefs.SetString("Code" + UnUseBlockMain.stageTitleIndex + "_" + i, Convert.ToBase64String(memoryStream.GetBuffer()));
+            
+        }
+        PlayerPrefs.SetInt("UsedCount", UsedItemList.Count);
+        PlayerPrefs.Save();
+    }
+    
+    public void LoadCode()
+    {
+        int UsedCount = PlayerPrefs.GetInt("UsedCount", 0);
+        ItemCopy cp;
+
+        for (int i=0;i<UsedCount; i++)
         {
-            if (UsedItemList[i] != null)
+            var data = PlayerPrefs.GetString("Code" + UnUseBlockMain.stageTitleIndex + "_" + i);
+
+            if (!string.IsNullOrEmpty(data))
             {
-                fullName = fullName + UsedItemList[i].Name + "/";
+                var binaryFormatter = new BinaryFormatter();
+                var memoryStream = new MemoryStream(Convert.FromBase64String(data));
+
+                // 가져온 데이터를 바이트 배열로 변환하고
+                // 사용하기 위해 다시 리스트로 캐스팅해줍니다.
+                cp = (ItemCopy)binaryFormatter.Deserialize(memoryStream);
+                AddUseListItem(cp.Name);
             }
-        }
-        if (DataControl.where == 1)
-        {
-            PlayerPrefs.SetString("Code" + ReviewScript.clickedStage, fullName);
-            PlayerPrefs.Save();
-        }
-        else
-        {
-            PlayerPrefs.SetString("Code" + UnUseBlockMain.stageTitleIndex, fullName);
-            PlayerPrefs.Save();
         }
     }
 }
