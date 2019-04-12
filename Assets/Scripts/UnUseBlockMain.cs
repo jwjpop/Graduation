@@ -687,7 +687,7 @@ public class UnUseBlockMain : MonoBehaviour
     public void ChangeSceneResult()
     {
         CheckAns.ans.Clear();
-
+        
         for (int i = 0; i < UsedItemList.Count; i++)
         {
             if (UsedItemList[i] != null)
@@ -728,8 +728,10 @@ public class UnUseBlockMain : MonoBehaviour
             Destroy(UsedItemList[i].game);
         }
 
-        UsedItemList.RemoveRange(0,UsedItemList.Count);
-
+        UsedItemList.Clear();
+        useIndex = 0;
+        fxstr = 0;
+               
         int UsedCount = PlayerPrefs.GetInt("UsedCount", 0);
         ItemCopy cp;
 
