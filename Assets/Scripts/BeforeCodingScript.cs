@@ -24,13 +24,15 @@ public class BeforeCodingScript : MonoBehaviour
     
     int stage = 0;
     int scriptStartIndex = 0;
+    int i;
 
     //1~8번 인덱스에 스크립트가 시작되는 부분을 넣음
     //그래서 /를 만나면 종료
+    //인덱스 대거 수정해야함
     string[] script = { "0번","9","15","16","17",
                         "18","19","20","21",
-                        "친구를 만나면 인사를 해야돼", "말을 하기 위해선 print를 사용해보자!",
-                        "문자는 꼭 따옴표(\"\")가 안에 들어가야해!","","그럼 친구에게 인사를 해보자!","/",
+                        "친구를 만나면 인사를 해야돼", "말을 하기 위해선 print를 사용해보자!","추가된 블록을 누르면 함수 내부로 들어갈 수 있어!","말을 적을 수 있는 공간이 필요해",
+                        "추가된 블록을 누르면 내용을 채울 수 있어","내용을 입력해줘","수정을 눌러야 반영이 돼","","그럼 친구에게 인사를 해보자!","/",
                         "2탄 시작",
                         "3탄 시작",
                         "4탄 시작",
@@ -64,7 +66,8 @@ public class BeforeCodingScript : MonoBehaviour
         bubble.SetActive(false);
         stageImage = GameObject.Find("StageImage");
         codingImage = GameObject.Find("CodingImage");
-
+        codingImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Before_" + stage + "_" + 1) as Sprite;
+        i = 2;
         ImageBinding();
     }
 
@@ -109,22 +112,22 @@ public class BeforeCodingScript : MonoBehaviour
             }
             else
             {
-                if (script[scriptStartIndex].Equals("문자는 꼭 따옴표(\"\")가 안에 들어가야해!"))
-                {
-                    codingImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Before_2") as Sprite;
-                }
-                else if (script[scriptStartIndex].Equals(""))
-                {
-                    beforePanel.SetActive(false);
-                    txtBubble.text = "Hello, World!";
-                    bubble.SetActive(true);
-                }
-                else
-                {
-                    beforePanel.SetActive(true);
-                    bubble.SetActive(false);
-                }
+                 if (script[scriptStartIndex].Equals(""))
+                 {
+                     beforePanel.SetActive(false);
+                     txtBubble.text = "Hello, World!";
+                     bubble.SetActive(true);
+                 }
+                 else
+                 {
+                     beforePanel.SetActive(true);
+                     bubble.SetActive(false);
+                 }
 
+                 //지금 조잡함
+                if (i == 9)
+                    i=1;
+                codingImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Before_"+stage +"_"+i++) as Sprite;
                 txtScript.text = script[scriptStartIndex];
             }
         }
