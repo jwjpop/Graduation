@@ -13,8 +13,8 @@ public class UnUseBlockMain : MonoBehaviour
     private GameObject panel;
     private GameObject upDownPanel;
     private GameObject ButtonAdd;
-    private GameObject buttonHighlight;
-
+    private GameObject buttonHighlightStart;
+    private GameObject buttonHighlightEnd;
     public Transform Content;
     public Transform UseContent;
 
@@ -22,7 +22,6 @@ public class UnUseBlockMain : MonoBehaviour
     public List<Item> UsedItemList;
 
     public Text title;
-    public Text codeLoad;
     public Text CurText;
     public InputField ConInput;
 
@@ -171,19 +170,6 @@ public class UnUseBlockMain : MonoBehaviour
 
         AddListItem();
         this.Binding();
-
-        if (DataControl.where == 1)
-        {
-            //저장된 코드 가져오기 소스
-            String fullName = PlayerPrefs.GetString("Code" + ReviewScript.clickedStage, "");
-            codeLoad.text = fullName;
-        }
-        else
-        {
-            String fullName = PlayerPrefs.GetString("Code" + stageTitleIndex, "");
-            codeLoad.text = fullName;
-        }
-
     }
 
     //사용된 버튼 리스트
@@ -321,8 +307,14 @@ public class UnUseBlockMain : MonoBehaviour
                                     fxstr = UsedItemList.IndexOf(UsedItemList[i]) + 1;
                                     FlagInnerChange();
                                     //여기 네임 규칙이 ★ 표시해놓은 곳이랑 같아야함
-                                    buttonHighlight = GameObject.Find(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
-                                    buttonHighlight.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
+                                    buttonHighlightStart = GameObject.Find(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
+
+                                    int endIndex = Convert.ToInt32(UsedItemList[i].Index)+1;
+                                    if (fx[j].Equals("if") || fx[j].Equals("elif"))
+                                        endIndex++;
+                                    buttonHighlightEnd = GameObject.Find(fx[j]+ "끝" + "_" + endIndex + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
                                     break;
                                 }
                                 //함수 끝이면
@@ -363,6 +355,13 @@ public class UnUseBlockMain : MonoBehaviour
                                     Debug.Log("전체모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
                                     fxstr = UsedItemList.IndexOf(UsedItemList[i]) + 1;
                                     FlagInnerChange();
+                                    buttonHighlightStart = GameObject.Find(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+                                    int endIndex = Convert.ToInt32(UsedItemList[i].Index) + 1;
+                                    if (fx[j].Equals("if") || fx[j].Equals("elif"))
+                                        endIndex++;
+                                    buttonHighlightEnd = GameObject.Find(fx[j] + "끝" + "_" + endIndex + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
                                     break;
                                 }
                                 //함수 끝이면
