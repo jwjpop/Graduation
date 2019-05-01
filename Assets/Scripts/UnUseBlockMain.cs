@@ -12,6 +12,8 @@ public class UnUseBlockMain : MonoBehaviour
     public GameObject ItemObject;
     private GameObject panel;
     private GameObject upDownPanel;
+    public Text okCancelText;
+    private GameObject okCancelPanel;
     private GameObject ButtonAdd;
     private GameObject buttonHighlightStart;
     private GameObject buttonHighlightEnd;
@@ -28,6 +30,8 @@ public class UnUseBlockMain : MonoBehaviour
     private bool flagAdd = true;
     private bool flagAll = true;
 
+    //동작 확인 판넬 플래그
+    private int panelFlag = 0;
     //각 블록을 식별할 수 있는 내부 인덱스
     private int useIndex = 0;
     //함수 짝을 맞추기 위한 인덱스
@@ -165,6 +169,8 @@ public class UnUseBlockMain : MonoBehaviour
         panel.SetActive(false);
         upDownPanel = GameObject.Find("UpDownPanel");
         upDownPanel.SetActive(false);
+        okCancelPanel = GameObject.Find("OkCancelPanel");
+        okCancelPanel.SetActive(false);
         ButtonAdd = GameObject.Find("Button_FlagAdd");
         CurText.GetComponent<Text>().text = DataControl.CurMoney.ToString();
 
@@ -683,71 +689,129 @@ public class UnUseBlockMain : MonoBehaviour
         upDownPanel.SetActive(false);
     }
 
+    public void ChangeSceneBeforeCoding()
+    {
+        okCancelPanel.SetActive(true);
+        okCancelText.text = "현재 사용된 블록들이 사라집니다.\n시나리오를 다시 보시겠습니까?";
+        panelFlag = 4;
+    }
+
+    public void ChangeSceneHome()
+    {
+        okCancelPanel.SetActive(true);
+        okCancelText.text = "현재 사용된 블록들이 사라집니다.\n귀가 하시겠습니까?";
+        panelFlag = 3;
+    }
+
     public void ChangeSceneResult()
     {
-        CheckAns.ans.Clear();
-        
-        for (int i = 0; i < UsedItemList.Count; i++)
-        {
-            if (UsedItemList[i] != null)
-            {
-                CheckAns.ans.Add(UsedItemList[i]);
-            }
-        }
-        SceneManager.LoadScene("ResultScene");
+        okCancelPanel.SetActive(true);
+        okCancelText.text = "현재 사용된 블록으로 채점합니다.\n제출 하시겠습니까?";
+        panelFlag = 2;
     }
 
     public void SaveCode()
     {
-        for (int i=0;i<UsedItemList.Count;i++)
-        {
-            var binaryFormatter = new BinaryFormatter();
-            var memoryStream = new MemoryStream();
-            ItemCopy itemCopy = new ItemCopy();
-
-            itemCopy.Name = UsedItemList[i].Name;
-            itemCopy.Index = UsedItemList[i].Index;
-            itemCopy.fxIndex = UsedItemList[i].fxIndex;
-            itemCopy.condition = UsedItemList[i].condition;
-            itemCopy.OnItemClick = UsedItemList[i].OnItemClick;
-            
-            binaryFormatter.Serialize(memoryStream, itemCopy);
-            
-            PlayerPrefs.SetString("Code" + UnUseBlockMain.stageTitleIndex + "_" + i, Convert.ToBase64String(memoryStream.GetBuffer()));
-            
-        }
-        PlayerPrefs.SetInt("UsedCount", UsedItemList.Count);
-        PlayerPrefs.Save();
+        okCancelPanel.SetActive(true);
+        okCancelText.text = "먼저 저장된 블록에 덮어씌워집니다.\n현재 블록을 저장하시겠습니까?";
+        panelFlag = 1;
     }
     
     public void LoadCode()
     {
-        for(int i=0;i<UsedItemList.Count;i++)
+        okCancelPanel.SetActive(true);
+        okCancelText.text = "사용했던 블록이 초기화 됩니다.\n저장된 블록을 불러오시겠습니까?";
+        panelFlag = 0;
+    }
+    
+    public void ButtonOfPanelOk()
+    {
+        //Load
+        if (panelFlag == 0)
         {
-            Destroy(UsedItemList[i].game);
-        }
-
-        UsedItemList.Clear();
-        useIndex = 0;
-        fxstr = 0;
-               
-        int UsedCount = PlayerPrefs.GetInt("UsedCount", 0);
-        ItemCopy cp;
-
-        for (int i=0;i<UsedCount; i++)
-        {
-            var data = PlayerPrefs.GetString("Code" + UnUseBlockMain.stageTitleIndex + "_" + i);
-
-            if (!string.IsNullOrEmpty(data))
+            okCancelPanel.SetActive(false);
+            for (int i = 0; i < UsedItemList.Count; i++)
             {
-                var binaryFormatter = new BinaryFormatter();
-                var memoryStream = new MemoryStream(Convert.FromBase64String(data));
+                Destroy(UsedItemList[i].game);
+            }
 
-                // 가져온 데이터를 바이트 배열로 변환하고
-                // 사용하기 위해 다시 리스트로 캐스팅해줍니다.
-                cp = (ItemCopy)binaryFormatter.Deserialize(memoryStream);
-                AddUseListItem(cp.Name);
+            UsedItemList.Clear();
+            useIndex = 0;
+            fxstr = 0;
+
+            int UsedCount = PlayerPrefs.GetInt("UsedCount", 0);
+            ItemCopy cp;
+
+            for (int i = 0; i < UsedCount; i++)
+            {
+                var data = PlayerPrefs.GetString("Code" + UnUseBlockMain.stageTitleIndex + "_" + i);
+
+                if (!string.IsNullOrEmpty(data))
+                {
+                    var binaryFormatter = new BinaryFormatter();
+                    var memoryStream = new MemoryStream(Convert.FromBase64String(data));
+
+                    // 가져온 데이터를 바이트 배열로 변환하고
+                    // 사용하기 위해 다시 리스트로 캐스팅해줍니다.
+                    cp = (ItemCopy)binaryFormatter.Deserialize(memoryStream);
+                    AddUseListItem(cp.Name);
+                }
             }
         }
+        //Save
+        else if (panelFlag == 1)
+        {
+            okCancelPanel.SetActive(false);
+            for (int i = 0; i < UsedItemList.Count; i++)
+            {
+                var binaryFormatter = new BinaryFormatter();
+                var memoryStream = new MemoryStream();
+                ItemCopy itemCopy = new ItemCopy();
+
+                itemCopy.Name = UsedItemList[i].Name;
+                itemCopy.Index = UsedItemList[i].Index;
+                itemCopy.fxIndex = UsedItemList[i].fxIndex;
+                itemCopy.condition = UsedItemList[i].condition;
+                itemCopy.OnItemClick = UsedItemList[i].OnItemClick;
+
+                binaryFormatter.Serialize(memoryStream, itemCopy);
+
+                PlayerPrefs.SetString("Code" + UnUseBlockMain.stageTitleIndex + "_" + i, Convert.ToBase64String(memoryStream.GetBuffer()));
+
+            }
+            PlayerPrefs.SetInt("UsedCount", UsedItemList.Count);
+            PlayerPrefs.Save();
+        }
+        //Submit
+        else if(panelFlag == 2)
+        {
+            okCancelPanel.SetActive(false);
+            CheckAns.ans.Clear();
+
+            for (int i = 0; i < UsedItemList.Count; i++)
+            {
+                if (UsedItemList[i] != null)
+                {
+                    CheckAns.ans.Add(UsedItemList[i]);
+                }
+            }
+            SceneManager.LoadScene("ResultScene");
+        }
+        //GoHome
+        else if(panelFlag == 3)
+        {
+            okCancelPanel.SetActive(false);
+            SceneManager.LoadScene("HomeScene");
+        }
+        //Review
+        else if (panelFlag == 4)
+        {
+            okCancelPanel.SetActive(false);
+            SceneManager.LoadScene("BeforeCodingScene");
+        }
+    }
+    public void ButtonOfPanelCancel()
+    {
+        okCancelPanel.SetActive(false);
     }
 }

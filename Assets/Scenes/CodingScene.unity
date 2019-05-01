@@ -693,6 +693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemObject: {fileID: 938307465605273988, guid: fb03e734352ef604abae469ffec5f8da,
     type: 3}
+  okCancelText: {fileID: 753964055}
   Content: {fileID: 2107350165}
   UseContent: {fileID: 1202568686}
   ItemList: []
@@ -1124,7 +1125,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00025177, y: 38.8}
+  m_AnchoredPosition: {x: -0.00024414062, y: 38.799988}
   m_SizeDelta: {x: -222.3, y: -818.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &348768657
@@ -1140,7 +1141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3496351, g: 0.45902303, b: 0.9150943, a: 1}
+  m_Color: {r: 0.7971698, g: 0.83660895, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1234,7 +1235,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uAC00\uC838\uC624\uAE30"
+  m_Text: "\uBD88\uB7EC\uC624\uAE30"
 --- !u!222 &389383519
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1321,7 +1322,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 204136230}
+      - m_Target: {fileID: 204136229}
         m_MethodName: ChangeSceneBeforeCoding
         m_Mode: 1
         m_Arguments:
@@ -1793,7 +1794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3496351, g: 0.45902303, b: 0.9150943, a: 1}
+  m_Color: {r: 0.79607844, g: 0.8352941, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1853,7 +1854,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -170.00002, y: 238}
+  m_AnchoredPosition: {x: -170.00002, y: -341}
   m_SizeDelta: {x: 128.1, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &753130580
@@ -1981,7 +1982,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 19}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 280, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &753964055
 MonoBehaviour:
@@ -2671,7 +2672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3496351, g: 0.45902303, b: 0.9150943, a: 1}
+  m_Color: {r: 0.79607844, g: 0.8352941, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2884,7 +2885,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -170, y: -339.99997}
+  m_AnchoredPosition: {x: -170, y: 240}
   m_SizeDelta: {x: 128.1, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1118594232
@@ -2927,7 +2928,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 204136230}
+      - m_Target: {fileID: 204136229}
         m_MethodName: ChangeSceneHome
         m_Mode: 1
         m_Arguments:
@@ -3013,7 +3014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.0000011457814, y: 0.000003106762}
+  m_AnchoredPosition: {x: 0.0000011213087, y: 0}
   m_SizeDelta: {x: 314, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1202568687
@@ -3245,7 +3246,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 204136229}
-        m_MethodName: conUp
+        m_MethodName: ButtonOfPanelOk
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4468,7 +4469,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 204136229}
-        m_MethodName: conDown
+        m_MethodName: ButtonOfPanelCancel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5115,7 +5116,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000013311671, y: -0.00004264583}
+  m_AnchoredPosition: {x: -0.000023372791, y: -0.00004477633}
   m_SizeDelta: {x: 128, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2107350166
