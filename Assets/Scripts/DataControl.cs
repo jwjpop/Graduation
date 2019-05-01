@@ -12,7 +12,8 @@ public class DataControl : MonoBehaviour
     public Text CurText;
 
     private GameObject buttonUnderLeft;
-    
+    private GameObject buttonHistory;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,16 @@ public class DataControl : MonoBehaviour
 
         buttonUnderLeft = GameObject.Find("ButtonUnderLeft");
         buttonUnderLeft.GetComponent<Button>().interactable = false;
+
+        buttonHistory = GameObject.Find("ButtonTopHistory");
+        if (UnUseBlockMain.stageTitleIndex == 1)
+        {
+            buttonHistory.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            buttonHistory.GetComponent<Button>().interactable = true;
+        }
     }
 
     public void moneyReset()
