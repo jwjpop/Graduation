@@ -19,6 +19,7 @@ public class UnUseBlockMain : MonoBehaviour
     private GameObject okCancelPanel;
     private GameObject ButtonAdd;
     private GameObject buttonHighlightStart;
+    private GameObject buttonHighlightCondition;
     private GameObject buttonHighlightEnd;
 
     private GameObject unUseScrollView;
@@ -227,7 +228,8 @@ public class UnUseBlockMain : MonoBehaviour
         usebtnItemTemp.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
         useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(194, 70);
         useitemobjectTemp.Condition.text = null;
-        
+        usebtnItemTemp.tag = "fx";
+
         //만약 변수라면
         for (int i = 0; i < var.Length; i++)
         {
@@ -237,6 +239,7 @@ public class UnUseBlockMain : MonoBehaviour
                 useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(70, 70);
                 useitemobjectTemp.Item.onClick = new Button.ButtonClickedEvent();
                 useitemobjectTemp.Item.onClick.AddListener(() => condition(Index));
+                usebtnItemTemp.tag = "var";
                 break;
             }
         }
@@ -250,6 +253,7 @@ public class UnUseBlockMain : MonoBehaviour
                 useitemobjectTemp.Item.image.rectTransform.sizeDelta = new Vector2(70, 70);
                 useitemobjectTemp.Item.onClick = new Button.ButtonClickedEvent();
                 useitemobjectTemp.Item.onClick.AddListener(() => extra(Index));
+                usebtnItemTemp.tag = "extra";
                 break;
             }
         }
@@ -328,7 +332,11 @@ public class UnUseBlockMain : MonoBehaviour
 
                                     int endIndex = Convert.ToInt32(UsedItemList[i].Index)+1;
                                     if (fx[j].Equals("if") || fx[j].Equals("elif"))
+                                    {
+                                        buttonHighlightCondition = GameObject.Find("조건_" + endIndex + " " + UsedItemList[i].fxIndex);
+                                        buttonHighlightCondition.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
                                         endIndex++;
+                                    }
                                     buttonHighlightEnd = GameObject.Find(fx[j]+ "끝" + "_" + endIndex + " " + UsedItemList[i].fxIndex);
                                     buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
                                     break;
@@ -339,6 +347,18 @@ public class UnUseBlockMain : MonoBehaviour
                                     Debug.Log("함수모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
                                     fxstr = UsedItemList.IndexOf(UsedItemList[i]);
                                     FlagInnerChange();
+                                    buttonHighlightStart = GameObject.Find(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
+
+                                    int endIndex = Convert.ToInt32(UsedItemList[i].Index) - 1;
+                                    if (fx[j].Equals("if") || fx[j].Equals("elif"))
+                                    {
+                                        buttonHighlightCondition = GameObject.Find("조건_" + endIndex + " " + UsedItemList[i].fxIndex);
+                                        buttonHighlightCondition.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
+                                        endIndex--;
+                                    }
+                                    buttonHighlightEnd = GameObject.Find(fx[j] + "시작" + "_" + endIndex + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
                                     break;
                                 }
                                 else if (UsedItemList[i].Name.Equals("조건"))
@@ -346,6 +366,31 @@ public class UnUseBlockMain : MonoBehaviour
                                     Debug.Log("함수모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
                                     fxstr = UsedItemList.IndexOf(UsedItemList[i]);
                                     FlagInnerChange();
+
+                                    buttonHighlightStart = GameObject.Find("if시작" + "_" + (UsedItemList.IndexOf(UsedItemList[i])-1) + " " + UsedItemList[i].fxIndex);
+                                    if (buttonHighlightStart != null)
+                                    {
+                                        buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
+                                    }
+                                    else
+                                    {
+                                        buttonHighlightStart = GameObject.Find("elif시작" + "_" + (UsedItemList.IndexOf(UsedItemList[i]) - 1) + " " + UsedItemList[i].fxIndex);
+                                        buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
+                                    }
+
+                                    buttonHighlightCondition = GameObject.Find("조건_" + UsedItemList.IndexOf(UsedItemList[i]) + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlightCondition.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
+
+                                    buttonHighlightEnd = GameObject.Find("if끝" + "_" + (UsedItemList.IndexOf(UsedItemList[i]) + 1) + " " + UsedItemList[i].fxIndex);
+                                    if (buttonHighlightEnd != null)
+                                    {
+                                        buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
+                                    }
+                                    else
+                                    {
+                                        buttonHighlightEnd = GameObject.Find("elif끝" + "_" + (UsedItemList.IndexOf(UsedItemList[i]) + 1) + " " + UsedItemList[i].fxIndex);
+                                        buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
+                                    }
                                     upDownPanel.SetActive(true);
                                     break;
                                 }
@@ -375,7 +420,11 @@ public class UnUseBlockMain : MonoBehaviour
                                     buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
                                     int endIndex = Convert.ToInt32(UsedItemList[i].Index) + 1;
                                     if (fx[j].Equals("if") || fx[j].Equals("elif"))
+                                    {
+                                        buttonHighlightCondition = GameObject.Find("조건_" + endIndex + " " + UsedItemList[i].fxIndex);
+                                        buttonHighlightCondition.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
                                         endIndex++;
+                                    }
                                     buttonHighlightEnd = GameObject.Find(fx[j] + "끝" + "_" + endIndex + " " + UsedItemList[i].fxIndex);
                                     buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
                                     break;
@@ -386,6 +435,18 @@ public class UnUseBlockMain : MonoBehaviour
                                     Debug.Log("전체모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
                                     fxstr = UsedItemList.IndexOf(UsedItemList[i]);
                                     FlagInnerChange();
+                                    buttonHighlightStart = GameObject.Find(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+
+                                    int endIndex = Convert.ToInt32(UsedItemList[i].Index) - 1;
+                                    if (fx[j].Equals("if") || fx[j].Equals("elif"))
+                                    {
+                                        buttonHighlightCondition = GameObject.Find("조건_" + endIndex + " " + UsedItemList[i].fxIndex);
+                                        buttonHighlightCondition.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+                                        endIndex--;
+                                    }
+                                    buttonHighlightEnd = GameObject.Find(fx[j] + "시작" + "_" + endIndex + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
                                     break;
                                 }
                                 else if (UsedItemList[i].Name.Equals("조건"))
@@ -538,10 +599,21 @@ public class UnUseBlockMain : MonoBehaviour
         if (flagAdd)
         {
             flagAdd = false;
-            flagAll = true;
             ButtonAdd.GetComponent<Image>().sprite = Resources.Load<Sprite>("modeDelete") as Sprite;
             useScrollView.GetComponent<Image>().sprite = Resources.Load<Sprite>("deleteModeOn") as Sprite;
             unUseScrollView.GetComponent<Image>().sprite = Resources.Load<Sprite>("addModeOff") as Sprite;
+
+            //함수 모드일 경우에 빠져나오고 하이라이트 빼준다.
+            if (!flagAll)
+            {
+                flagAll = true;
+                GameObject[] fx = GameObject.FindGameObjectsWithTag("fx");
+                for(int i=0;i<fx.Length;i++)
+                {
+                    fx[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+                }
+            }
+
         }
         //추가모드
         else
