@@ -38,6 +38,8 @@ public class UnUseBlockMain : MonoBehaviour
     private bool flagAdd = true;
     private bool flagAll = true;
 
+    //같은 함수인지 확인하기 위한 플래그
+    private int nowFx = -1;
     //동작 확인 판넬 플래그
     private int panelFlag = 0;
     //각 블록을 식별할 수 있는 내부 인덱스
@@ -339,6 +341,8 @@ public class UnUseBlockMain : MonoBehaviour
                                     }
                                     buttonHighlightEnd = GameObject.Find(fx[j]+ "끝" + "_" + endIndex + " " + UsedItemList[i].fxIndex);
                                     buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
+
+                                    nowFx = UsedItemList[i].fxIndex;
                                     break;
                                 }
                                 //함수 끝이면
@@ -359,6 +363,8 @@ public class UnUseBlockMain : MonoBehaviour
                                     }
                                     buttonHighlightEnd = GameObject.Find(fx[j] + "시작" + "_" + endIndex + " " + UsedItemList[i].fxIndex);
                                     buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
+
+                                    nowFx = UsedItemList[i].fxIndex;
                                     break;
                                 }
                                 else if (UsedItemList[i].Name.Equals("조건"))
@@ -367,31 +373,34 @@ public class UnUseBlockMain : MonoBehaviour
                                     fxstr = UsedItemList.IndexOf(UsedItemList[i]);
                                     FlagInnerChange();
 
-                                    buttonHighlightStart = GameObject.Find("if시작" + "_" + (UsedItemList.IndexOf(UsedItemList[i])-1) + " " + UsedItemList[i].fxIndex);
+                                    Debug.Log("if시작" + "_" + (UsedItemList[i].Index - 1) + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlightStart = GameObject.Find("if시작" + "_" + (UsedItemList[i].Index - 1) + " " + UsedItemList[i].fxIndex);
                                     if (buttonHighlightStart != null)
                                     {
                                         buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
                                     }
                                     else
                                     {
-                                        buttonHighlightStart = GameObject.Find("elif시작" + "_" + (UsedItemList.IndexOf(UsedItemList[i]) - 1) + " " + UsedItemList[i].fxIndex);
+                                        buttonHighlightStart = GameObject.Find("elif시작" + "_" + (UsedItemList[i].Index - 1) + " " + UsedItemList[i].fxIndex);
                                         buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
                                     }
 
-                                    buttonHighlightCondition = GameObject.Find("조건_" + UsedItemList.IndexOf(UsedItemList[i]) + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlightCondition = GameObject.Find("조건_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
                                     buttonHighlightCondition.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
 
-                                    buttonHighlightEnd = GameObject.Find("if끝" + "_" + (UsedItemList.IndexOf(UsedItemList[i]) + 1) + " " + UsedItemList[i].fxIndex);
+                                    buttonHighlightEnd = GameObject.Find("if끝" + "_" + (UsedItemList[i].Index + 1) + " " + UsedItemList[i].fxIndex);
                                     if (buttonHighlightEnd != null)
                                     {
                                         buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
                                     }
                                     else
                                     {
-                                        buttonHighlightEnd = GameObject.Find("elif끝" + "_" + (UsedItemList.IndexOf(UsedItemList[i]) + 1) + " " + UsedItemList[i].fxIndex);
+                                        buttonHighlightEnd = GameObject.Find("elif끝" + "_" + (UsedItemList[i].Index + 1) + " " + UsedItemList[i].fxIndex);
                                         buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLongHighlight") as Sprite;
                                     }
                                     upDownPanel.SetActive(true);
+
+                                    nowFx = UsedItemList[i].fxIndex;
                                     break;
                                 }
                             }
@@ -413,47 +422,92 @@ public class UnUseBlockMain : MonoBehaviour
                                 //함수시작이면
                                 if (UsedItemList[i].Name.Equals(fx[j] + "시작"))
                                 {
-                                    Debug.Log("전체모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
-                                    fxstr = UsedItemList.IndexOf(UsedItemList[i]) + 1;
-                                    FlagInnerChange();
-                                    buttonHighlightStart = GameObject.Find(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
-                                    buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
-                                    int endIndex = Convert.ToInt32(UsedItemList[i].Index) + 1;
-                                    if (fx[j].Equals("if") || fx[j].Equals("elif"))
+                                    //같은 함수면
+                                    if (nowFx == UsedItemList[i].fxIndex)
                                     {
-                                        buttonHighlightCondition = GameObject.Find("조건_" + endIndex + " " + UsedItemList[i].fxIndex);
-                                        buttonHighlightCondition.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
-                                        endIndex++;
+                                        Debug.Log("전체모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
+                                        fxstr = UsedItemList.IndexOf(UsedItemList[i]) + 1;
+                                        FlagInnerChange();
+                                        buttonHighlightStart = GameObject.Find(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
+                                        buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+                                        int endIndex = Convert.ToInt32(UsedItemList[i].Index) + 1;
+                                        if (fx[j].Equals("if") || fx[j].Equals("elif"))
+                                        {
+                                            buttonHighlightCondition = GameObject.Find("조건_" + endIndex + " " + UsedItemList[i].fxIndex);
+                                            buttonHighlightCondition.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+                                            endIndex++;
+                                        }
+                                        buttonHighlightEnd = GameObject.Find(fx[j] + "끝" + "_" + endIndex + " " + UsedItemList[i].fxIndex);
+                                        buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
                                     }
-                                    buttonHighlightEnd = GameObject.Find(fx[j] + "끝" + "_" + endIndex + " " + UsedItemList[i].fxIndex);
-                                    buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+                                    //다른 함수면
+                                    else
+                                    {
+                                        GameObject[] fx = GameObject.FindGameObjectsWithTag("fx");
+                                        for (int k= 0; k < fx.Length; k++)
+                                        {
+                                            fx[k].GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+                                        }
+                                        FlagInnerChange();
+                                        usedButtonClick(UsedItemList[i].Index);
+                                    }
                                     break;
                                 }
                                 //함수 끝이면
                                 else if (UsedItemList[i].Name.Equals(fx[j] + "끝"))
                                 {
-                                    Debug.Log("전체모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
-                                    fxstr = UsedItemList.IndexOf(UsedItemList[i]);
-                                    FlagInnerChange();
-                                    buttonHighlightStart = GameObject.Find(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
-                                    buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
-
-                                    int endIndex = Convert.ToInt32(UsedItemList[i].Index) - 1;
-                                    if (fx[j].Equals("if") || fx[j].Equals("elif"))
+                                    //같은 함수면
+                                    if (nowFx == UsedItemList[i].fxIndex)
                                     {
-                                        buttonHighlightCondition = GameObject.Find("조건_" + endIndex + " " + UsedItemList[i].fxIndex);
-                                        buttonHighlightCondition.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
-                                        endIndex--;
+                                        Debug.Log("전체모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
+                                        fxstr = UsedItemList.IndexOf(UsedItemList[i]);
+                                        FlagInnerChange();
+                                        buttonHighlightStart = GameObject.Find(UsedItemList[i].Name + "_" + UsedItemList[i].Index + " " + UsedItemList[i].fxIndex);
+                                        buttonHighlightStart.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+
+                                        int endIndex = Convert.ToInt32(UsedItemList[i].Index) - 1;
+                                        if (fx[j].Equals("if") || fx[j].Equals("elif"))
+                                        {
+                                            buttonHighlightCondition = GameObject.Find("조건_" + endIndex + " " + UsedItemList[i].fxIndex);
+                                            buttonHighlightCondition.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+                                            endIndex--;
+                                        }
+                                        buttonHighlightEnd = GameObject.Find(fx[j] + "시작" + "_" + endIndex + " " + UsedItemList[i].fxIndex);
+                                        buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
                                     }
-                                    buttonHighlightEnd = GameObject.Find(fx[j] + "시작" + "_" + endIndex + " " + UsedItemList[i].fxIndex);
-                                    buttonHighlightEnd.GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+                                    //다른 함수면
+                                    else
+                                    {
+                                        GameObject[] fx = GameObject.FindGameObjectsWithTag("fx");
+                                        for (int k = 0; k < fx.Length; k++)
+                                        {
+                                            fx[k].GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+                                        }
+                                        FlagInnerChange();
+                                        usedButtonClick(UsedItemList[i].Index);
+                                    }
                                     break;
                                 }
                                 else if (UsedItemList[i].Name.Equals("조건"))
                                 {
-                                    Debug.Log("함수모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
-                                    fxstr = UsedItemList.IndexOf(UsedItemList[i]);
-                                    upDownPanel.SetActive(true);
+                                    //같은 함수면
+                                    if (nowFx == UsedItemList[i].fxIndex)
+                                    {
+                                        Debug.Log("함수모드로 전환 " + UsedItemList[i].Name + "의 인덱스 : " + UsedItemList.IndexOf(UsedItemList[i]));
+                                        fxstr = UsedItemList.IndexOf(UsedItemList[i]);
+                                        upDownPanel.SetActive(true);
+                                    }
+                                    //다른 함수면
+                                    else
+                                    {
+                                        GameObject[] fx = GameObject.FindGameObjectsWithTag("fx");
+                                        for (int k = 0; k < fx.Length; k++)
+                                        {
+                                            fx[k].GetComponent<Image>().sprite = Resources.Load<Sprite>("fxLong") as Sprite;
+                                        }
+                                        FlagInnerChange();
+                                        usedButtonClick(UsedItemList[i].Index);
+                                    }
                                     break;
                                 }
                             }
