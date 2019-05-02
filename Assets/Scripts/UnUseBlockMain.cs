@@ -10,13 +10,20 @@ using System.IO;
 public class UnUseBlockMain : MonoBehaviour
 {
     public GameObject ItemObject;
+
     private GameObject panel;
+
     private GameObject upDownPanel;
     public Text okCancelText;
+
     private GameObject okCancelPanel;
     private GameObject ButtonAdd;
     private GameObject buttonHighlightStart;
     private GameObject buttonHighlightEnd;
+
+    private GameObject unUseScrollView;
+    private GameObject useScrollView;
+
     public Transform Content;
     public Transform UseContent;
 
@@ -173,6 +180,9 @@ public class UnUseBlockMain : MonoBehaviour
         okCancelPanel.SetActive(false);
         ButtonAdd = GameObject.Find("Button_FlagAdd");
         CurText.GetComponent<Text>().text = DataControl.CurMoney.ToString();
+
+        unUseScrollView = GameObject.Find("UnUseScrollView");
+        useScrollView = GameObject.Find("UseScrollView");
 
         AddListItem();
         this.Binding();
@@ -524,16 +534,22 @@ public class UnUseBlockMain : MonoBehaviour
     //추가,제거 모드 전환
     public void FlagAddChange()
     {
+        //삭제모드
         if (flagAdd)
         {
             flagAdd = false;
             flagAll = true;
             ButtonAdd.GetComponent<Image>().sprite = Resources.Load<Sprite>("modeDelete") as Sprite;
+            useScrollView.GetComponent<Image>().sprite = Resources.Load<Sprite>("deleteModeOn") as Sprite;
+            unUseScrollView.GetComponent<Image>().sprite = Resources.Load<Sprite>("addModeOff") as Sprite;
         }
+        //추가모드
         else
         {
             flagAdd = true;
             ButtonAdd.GetComponent<Image>().sprite = Resources.Load<Sprite>("modeAdd") as Sprite;
+            useScrollView.GetComponent<Image>().sprite = Resources.Load<Sprite>("deleteModeOff") as Sprite;
+            unUseScrollView.GetComponent<Image>().sprite = Resources.Load<Sprite>("addModeOn") as Sprite;
         }
     }
 
