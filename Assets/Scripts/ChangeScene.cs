@@ -40,4 +40,16 @@ public void ChangeSceneHomeWork()
     {
         SceneManager.LoadScene("BeforeCodingScene");
     }
+    public void ChangeSceneStory()
+    {
+        int story = PlayerPrefs.GetInt("story", 0);
+        if (story == 0)
+        {
+            SceneManager.LoadScene("StoryScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("HomeScene");
+        }
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TypeWriterEffect : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class TypeWriterEffect : MonoBehaviour
 	public float delay;
     public float Skip_delay;
     public int cnt;
+    public int story;
 
     //타이핑효과 변수
     public string[] fulltext;
@@ -24,21 +26,17 @@ public class TypeWriterEffect : MonoBehaviour
     void Start()
     {
         Get_Typing(dialog_cnt,fulltext);
+        story = PlayerPrefs.GetInt("story", 0);
     }
 
 
     //모든 텍스트 호출완료시 탈출
     void Update()
     {
-        if (text_exit == true)
-        {
-            gameObject.SetActive(false);
-        }
         if (Input.GetMouseButtonDown(0)) // 테스트임 터치로 바꿔야함
         {
             End_Typing();
         }
-
     }
 
     //다음버튼함수
@@ -84,6 +82,8 @@ public class TypeWriterEffect : MonoBehaviour
         {
             text_exit = true;
             StopCoroutine("showText");
+            if(story==0)
+            SceneManager.LoadScene("HomeScene");
         }
         else
         {

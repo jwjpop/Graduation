@@ -47,4 +47,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ReviewScene.unity
     guid: cd450421f55cd3f44a1bffc382ac91a8
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 0bf95d9ce78fb7e489de6bb8e2ecf51e
+  - enabled: 1
+    path: Assets/Scenes/StoryScene.unity
+    guid: b90c1f2ce5bfa7646b65554507ea5fc6
   m_configObjects: {}

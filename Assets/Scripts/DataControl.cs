@@ -41,6 +41,15 @@ public class DataControl : MonoBehaviour
         {
             buttonHistory.GetComponent<Button>().interactable = true;
         }
+        
+        PlayerPrefs.SetInt("story", 1);
+        PlayerPrefs.Save();
+    }
+
+    public void storyReset()
+    {
+        PlayerPrefs.SetInt("story", 0);
+        PlayerPrefs.Save();
     }
 
     public void moneyReset()
