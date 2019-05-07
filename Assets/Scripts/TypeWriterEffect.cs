@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class TypeWriterEffect : MonoBehaviour
 {
+    public GameObject textFull;
+    public bool touch;
     //변경할 변수
 	public float delay;
     public float Skip_delay;
@@ -27,6 +29,8 @@ public class TypeWriterEffect : MonoBehaviour
     {
         Get_Typing(dialog_cnt,fulltext);
         story = PlayerPrefs.GetInt("story", 0);
+        textFull = GameObject.Find("TextFull");
+        textFull.SetActive(false);
     }
 
 
@@ -35,6 +39,7 @@ public class TypeWriterEffect : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) // 테스트임 터치로 바꿔야함
         {
+            touch = false;
             End_Typing();
         }
     }
@@ -110,6 +115,19 @@ public class TypeWriterEffect : MonoBehaviour
             //스킵_지연후 종료
             Debug.Log("Enter 대기");
             text_full = true;
+            touch = true;
+            StartCoroutine(ShowClick());
         }
     }
+    IEnumerator ShowClick()
+    {
+        while (touch)
+        {
+            textFull.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            textFull.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+    
 }
