@@ -9,9 +9,14 @@ public class DataControl : MonoBehaviour
     public static int CurMoney = 0 ;
     //어디에서 접근하는지 나타냄
     public static int where = 0;
-    public Text CurText;
 
+    public Text CurText;
+    public Text TutoText;
+
+    private GameObject arrow;
+    private GameObject panelTuto;
     private GameObject buttonUnderLeft;
+    private GameObject buttonUnderRight;
     private GameObject buttonHistory;
 
     // Start is called before the first frame update
@@ -31,6 +36,9 @@ public class DataControl : MonoBehaviour
 
         buttonUnderLeft = GameObject.Find("ButtonUnderLeft");
         buttonUnderLeft.GetComponent<Button>().interactable = false;
+        buttonUnderRight = GameObject.Find("ButtonUnderRight");
+        arrow = GameObject.Find("Arrow");
+        arrow.SetActive(false);
 
         buttonHistory = GameObject.Find("ButtonTopHistory");
         if (UnUseBlockMain.stageTitleIndex == 1)
@@ -41,9 +49,26 @@ public class DataControl : MonoBehaviour
         {
             buttonHistory.GetComponent<Button>().interactable = true;
         }
+        panelTuto = GameObject.Find("PanelTuto");
+        if (UnUseBlockMain.stageTitleIndex != 1)
+        {
+            panelTuto.SetActive(false);
+        }
         
         PlayerPrefs.SetInt("story", 1);
         PlayerPrefs.Save();
+    }
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) // 테스트임 터치로 바꿔야함
+        {
+            if(UnUseBlockMain.stageTitleIndex==1)
+            {
+                TutoText.text = "오늘은 입학식 날이야! \n 먼저 학교에 가보자!";
+                StartCoroutine(ShowClick());
+                buttonUnderRight.transform.SetAsLastSibling();
+            }
+        }
     }
 
     public void storyReset()
@@ -72,5 +97,15 @@ public class DataControl : MonoBehaviour
     {
         where = 0;
     }
-    
+    IEnumerator ShowClick()
+    {
+        while (true)
+        {
+            arrow.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            arrow.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
 }
