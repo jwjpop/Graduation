@@ -67,7 +67,7 @@ public class UnUseBlockMain : MonoBehaviour
                               "if","과제","==","0","&&","벚꽃","1","print","\"\"","/"};
 
     //스테이지 타이틀
-    private string[] stageTitle = {"0번","1탄","2탄","3탄","4탄","5탄","6탄","7탄","8탄"};
+    private string[] stageTitle = {"0번","첫 학기 친구를 처음 만남","수업을 들어야해","자료형을 이해하자","복합 프린트","특정 친구에게 인사하기","휴강이 될까요","체크카드에 얼마가 있을까요","과제와 벚꽃 시즌"};
     //함수 배열
     private string[] fx = { "print", "if","else","elif"};
     //변수 배열

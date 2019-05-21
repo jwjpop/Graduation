@@ -590,7 +590,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: A
+  m_Text: 'AAAAAAAAA
+
+    AAAAAAAAAAAAA
+
+    AAAAAAAAAAA'
 --- !u!222 &1162379510
 CanvasRenderer:
   m_ObjectHideFlags: 0

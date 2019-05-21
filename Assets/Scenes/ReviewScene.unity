@@ -553,7 +553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000014067086, y: -0.0000148650115}
+  m_AnchoredPosition: {x: -0.000014067086, y: 0.000008582523}
   m_SizeDelta: {x: 314, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &496832696
@@ -942,7 +942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.0000038397625, y: 0.000009945471}
+  m_AnchoredPosition: {x: 0.0000070323213, y: -0.000028061433}
   m_SizeDelta: {x: 128, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &659424043
@@ -2821,12 +2821,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemObject: {fileID: 938307465605273988, guid: fb03e734352ef604abae469ffec5f8da,
     type: 3}
+  okCancelText: {fileID: 0}
   Content: {fileID: 659424042}
   UseContent: {fileID: 496832695}
   ItemList: []
   UsedItemList: []
   title: {fileID: 839290730}
-  codeLoad: {fileID: 198190950}
   CurText: {fileID: 574331798}
   ConInput: {fileID: 2044262570}
 --- !u!81 &1489893571
