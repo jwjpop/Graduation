@@ -203,7 +203,7 @@ public class CheckAns : MonoBehaviour
         {
             if (all != null && all.Equals("print시작Subjectprint끝"))
             {
-                if (txt != null && txt.Equals("Hello, World!"))
+                if (txt != null)
                 {
                     bubbleText.text = txt;
                     answer = true;
