@@ -222,7 +222,7 @@ public class CheckAns : MonoBehaviour
             if (all != null && all.Equals("print시작X+Y,\"\"print끝"))
             {
                 if(X != null && Y != null && txt != null 
-                    && X.Equals("3") && Y.Equals("4") && txt.Equals("명인거지!"))
+                    && X.Equals("3") && Y.Equals("4") && txt.Contains(""))
                 {
                     bubbleText.text = X + Y + txt;
                     answer = true;

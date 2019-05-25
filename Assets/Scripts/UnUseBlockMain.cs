@@ -67,7 +67,7 @@ public class UnUseBlockMain : MonoBehaviour
                               "if","과제","==","0","&&","벚꽃","1","print","\"\"","/"};
 
     //스테이지 타이틀
-    private string[] stageTitle = {"0번","첫 학기 친구를 처음 만남","수업을 들어야해","자료형을 이해하자","복합 프린트","특정 친구에게 인사하기","휴강이 될까요","체크카드에 얼마가 있을까요","과제와 벚꽃 시즌"};
+    private string[] stageTitle = {"0번","첫 학기, 새 친구에게 인사하기","어떤 수업을 들을까","자료형을 이해하자","복합 프린트","특정 친구에게 인사하기","휴강이 될까요","체크카드에 얼마가 있을까요","과제와 벚꽃 시즌"};
     //함수 배열
     private string[] fx = { "print", "if","else","elif"};
     //변수 배열
@@ -777,9 +777,10 @@ public class UnUseBlockMain : MonoBehaviour
                         itemobjectTemp.Name.text = "\"" + input + "\"";
 
                         //인풋이 5자 이상일경우 줄임말로 표현해줌
-                        if (input.Length > 20)
+                        if (input.Length > 6)
                         {
-                            itemobjectTemp.Name.text = "\"" + input.Substring(0, 20) + "...";
+                            itemobjectTemp.Name.text = "\"" + input.Substring(0, 6) + "...";
+
                         }
                         break;
                     }
@@ -800,9 +801,9 @@ public class UnUseBlockMain : MonoBehaviour
                         itemobjectTemp.Condition.text = input;
 
                         //인풋이 4자 이상일경우 줄임말로 표현해줌
-                        if (input.Length > 20)
+                        if (input.Length > 6)
                         {
-                            itemobjectTemp.Condition.text = input.Substring(0, 20) + "...";
+                            itemobjectTemp.Condition.text = input.Substring(0, 6) + "...";
                         }
                         break;
                     }
