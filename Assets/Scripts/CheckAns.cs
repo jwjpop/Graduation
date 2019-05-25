@@ -69,12 +69,19 @@ public class CheckAns : MonoBehaviour
             result.text = "맞았습니다!";
             if (DataControl.where == 1)
             {
-
+                result.text = "복습중!";
             }
             else
             {
                 //정답시 스테이지 증가
                 UnUseBlockMain.stageTitleIndex++;
+                //돈증가 테스트
+                DataControl.CurMoney++;
+                CurText.text = DataControl.CurMoney.ToString();
+                //저장 테스트
+                PlayerPrefs.SetInt("stage", UnUseBlockMain.stageTitleIndex);
+                PlayerPrefs.SetInt("money", DataControl.CurMoney);
+                PlayerPrefs.Save();
             }
         }
         else
