@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ public class DataControl : MonoBehaviour
 {
     //돈 관리
     public static int CurMoney = 0 ;
+    public Text gradeAll;
     //어디에서 접근하는지 나타냄
     public static int where = 0;
 
@@ -19,6 +21,7 @@ public class DataControl : MonoBehaviour
     private GameObject buttonUnderRight;
     private GameObject buttonHistory;
 
+    float grades;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +60,12 @@ public class DataControl : MonoBehaviour
         
         PlayerPrefs.SetInt("story", 1);
         PlayerPrefs.Save();
+
+        for (int i = 1; i <= UnUseBlockMain.stageTitleIndex; i++)
+        {
+            grades += PlayerPrefs.GetFloat("grades" + i, 4.5f);
+        }
+        gradeAll.text = Convert.ToString(grades/UnUseBlockMain.stageTitleIndex);
     }
     void Update()
     {
