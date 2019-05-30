@@ -2031,6 +2031,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02036bc39f3b42b4c9e4ec2598b0553b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grade:
+  - {fileID: 0}
+  - {fileID: 1749250034}
+  - {fileID: 1374673011}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1399644554
 GameObject:
   m_ObjectHideFlags: 0

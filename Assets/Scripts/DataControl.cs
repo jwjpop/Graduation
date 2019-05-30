@@ -12,7 +12,7 @@ public class DataControl : MonoBehaviour
 
     public Text CurText;
     public Text TutoText;
-
+    
     private GameObject arrow;
     private GameObject panelTuto;
     private GameObject buttonUnderLeft;

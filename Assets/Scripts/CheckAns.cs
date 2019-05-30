@@ -10,6 +10,7 @@ public class CheckAns : MonoBehaviour
     public Text CurText;
     public static List<Item> ans = new List<Item>();
     int stage = 0;
+    float[] grades = new float[33];
     //보여지는 말풍선 텍스트
     public Text bubbleText;
     //보여지는 맞음,틀림 결과 텍스트
@@ -49,6 +50,10 @@ public class CheckAns : MonoBehaviour
         }
         explainImage = GameObject.Find("Stage");
 
+        for(int i=0;i<33;i++)
+        {
+            grades[i] = PlayerPrefs.GetFloat("grades"+i,4.5f);
+        }
         ImageBinding();
         Checker();
         Result();
@@ -93,15 +98,13 @@ public class CheckAns : MonoBehaviour
             }
             else
             {
-                //테스트를 위해 틀려도 스테이지 증가
-                UnUseBlockMain.stageTitleIndex++;
-                //돈증가 테스트
-                DataControl.CurMoney++;
-                CurText.text = DataControl.CurMoney.ToString();
-                //저장 테스트
-                PlayerPrefs.SetInt("stage", UnUseBlockMain.stageTitleIndex);
-                PlayerPrefs.SetInt("money", DataControl.CurMoney);
-                PlayerPrefs.Save();
+                if (grades[stage] > 2.0f)
+                {
+                    grades[stage] -= 0.5f;
+                    PlayerPrefs.SetFloat("grades"+stage,grades[stage]);
+                    PlayerPrefs.Save();
+                    Debug.Log(stage + " : " + grades[stage]); 
+                }
             }
             
         }
@@ -199,7 +202,7 @@ public class CheckAns : MonoBehaviour
         {
             if (all != null && all.Equals("print시작\"\"print끝"))
             {
-                if (txt != null && txt.Equals("Hello, World!"))
+                if (txt != null)
                 {
                     bubbleText.text = txt;
                     answer = true;
@@ -222,7 +225,7 @@ public class CheckAns : MonoBehaviour
             if (all != null && all.Equals("print시작X+Y,\"\"print끝"))
             {
                 if(X != null && Y != null && txt != null 
-                    && X.Equals("3") && Y.Equals("4") && txt.Contains(""))
+                    && Convert.ToInt32(X) + Convert.ToInt32(Y) == 7 && txt.Contains("명"))
                 {
                     bubbleText.text = X + Y + txt;
                     answer = true;
@@ -233,9 +236,9 @@ public class CheckAns : MonoBehaviour
         {
             if (all != null && all.Equals("print시작\"\",X+Y,\"\"print끝"))
             {
-                if (X != null && Y != null && X.Equals("1000") && Y.Equals("2000"))
+                if (X != null && Y != null && (X.Equals("1000") && Y.Equals("2000")) || (X.Equals("2000") && Y.Equals("1000")))
                 {
-                    if (txts[0].Equals("친구야") && txts[1].Equals("원이 필요해!"))
+                    if (txts[0].Contains("친구") && txts[1].Contains("필요"))
                     {
                         int value = Convert.ToInt32(X) + Convert.ToInt32(Y);
                         bubbleText.text = txts[0] + value + txts[1];
@@ -248,7 +251,7 @@ public class CheckAns : MonoBehaviour
         {
             if (all != null && all.Equals("if시작모자==빨간색조건print시작\"\"print끝if끝"))
             {
-                if (txt != null && txt.Equals("안녕"))
+                if (txt != null && txt.Contains("안녕"))
                 {
                     bubbleText.text = txt;
                     answer = true;
@@ -260,10 +263,10 @@ public class CheckAns : MonoBehaviour
             if (all != null && 
                 all.Equals("if시작문자==1조건print시작\"\"print끝if끝else시작print시작\"\"print끝else끝"))
             {
-                if (txts[0].Equals("수업 듣기") && txts[1].Equals("교실로 가기"))
+                if (txts[0].Contains("쉬기") && txts[1].Contains("교실"))
                 {
                     //정답일 때 뿌릴거 고민해야함
-                    bubbleText.text = txts[0] + txts[1];
+                    bubbleText.text = txts[0];
                     answer = true;
                 }
             }
@@ -310,7 +313,7 @@ public class CheckAns : MonoBehaviour
         {
             if (all != null && all.Equals("if시작과제==0&&벚꽃==1조건print시작\"\"print끝if끝"))
             {
-                if (txt != null && txt.Equals("놀자"))
+                if (txt != null && txt.Contains("놀자"))
                 {
                     bubbleText.text = txt;
                     answer = true;
