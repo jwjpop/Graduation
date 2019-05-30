@@ -1856,7 +1856,7 @@ GameObject:
   - component: {fileID: 1374673012}
   - component: {fileID: 1374673011}
   m_Layer: 5
-  m_Name: TextGradeString
+  m_Name: TextGradeString2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3207,7 +3207,7 @@ GameObject:
   - component: {fileID: 1749250035}
   - component: {fileID: 1749250034}
   m_Layer: 5
-  m_Name: TextGradeString
+  m_Name: TextGradeString1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

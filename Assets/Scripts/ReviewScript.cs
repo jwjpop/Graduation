@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ReviewScript : MonoBehaviour
 {
     string[] buttonName;
+    GameObject[] grade = new GameObject[9];
     GameObject[] seme = new GameObject[9];
     GameObject[] semeButton = new GameObject[33];
     public static int clickedStage;
@@ -17,6 +18,7 @@ public class ReviewScript : MonoBehaviour
         {
             seme[i] = GameObject.Find("seme" + i);
             seme[i].SetActive(false);
+            grade[i] = GameObject.Find("TextGradeString"+i);
         }
         
         if (UnUseBlockMain.stageTitleIndex >= 1)
@@ -53,17 +55,13 @@ public class ReviewScript : MonoBehaviour
         buttonName = button.name.Split('_');
         clickedStage = Convert.ToInt32(buttonName[1]);
         
-        if(clickedStage<UnUseBlockMain.stageTitleIndex)
+        if(clickedStage<=UnUseBlockMain.stageTitleIndex)
         {
             String fullName = PlayerPrefs.GetString("Code"+clickedStage,"");
             Debug.Log(fullName);
             DataControl.where = 1;
             SceneManager.LoadScene("ReviewScene");
             
-        }
-        else
-        {
-            Debug.Log("클리어하고오세요");
         }
     }
     
