@@ -64,7 +64,7 @@ public class DataControl : MonoBehaviour
         {
             if(UnUseBlockMain.stageTitleIndex==1)
             {
-                TutoText.text = "오늘은 입학식 날이야! \n 먼저 학교에 가보자!";
+                TutoText.text = "이제 OT도 다녀왔고 \n 첫 수업을 들으러 학교에 가볼까?";
                 StartCoroutine(ShowClick());
                 buttonUnderRight.transform.SetAsLastSibling();
             }
