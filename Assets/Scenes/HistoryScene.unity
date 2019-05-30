@@ -2041,6 +2041,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  gradeFloat:
+  - {fileID: 0}
+  - {fileID: 1399644556}
+  - {fileID: 1548297615}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1399644554
 GameObject:
   m_ObjectHideFlags: 0

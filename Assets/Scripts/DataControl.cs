@@ -71,6 +71,15 @@ public class DataControl : MonoBehaviour
         }
     }
 
+    public void gradeReset()
+    {
+        for(int i=1;i<=8;i++)
+        {
+            PlayerPrefs.SetFloat("grades" + i, 4.5f);
+        }
+        PlayerPrefs.Save();
+    }
+
     public void storyReset()
     {
         PlayerPrefs.SetInt("story", 0);

@@ -7,6 +7,8 @@ public class ReviewScript : MonoBehaviour
 {
     string[] buttonName;
     public Text[] grade = new Text[9];
+    public Text[] gradeFloat = new Text[9];
+
     GameObject[] seme = new GameObject[9];
     GameObject[] semeButton = new GameObject[33];
     public static int clickedStage;
@@ -41,6 +43,7 @@ public class ReviewScript : MonoBehaviour
             gradeAvg[i] = (grades[i*4-3] + grades[i*4-2] + grades[i*4-1] + grades[i*4])/4;
             if (grade[i] != null)
             {
+                gradeFloat[i].text = Convert.ToString(gradeAvg[i]);
                 if (gradeAvg[i] == 4.5)
                 {
                     grade[i].text = "A+";
